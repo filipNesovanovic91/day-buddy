@@ -45,3 +45,28 @@
   height: 746px;
   gap: 32px; 
 }
+
+.navigation {
+  width: 1148px;
+  height: 72px;
+  padding: 0 0 0 12px;
+  gap: 32px; 
+}
+
+.navigation-list {
+  list-style-type: none;
+  display: flex;
+}
+
+.navigation-list a {
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  width: 137px;
+  height: 48px;
+  padding: 6px 6px 6px 0;
+  border: 0px 0px 2px 0;
+  gap: 8px;
+  color: #ffffff;
+  font-size: 16px; 
+}
