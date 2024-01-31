@@ -1,0 +1,44 @@
+.main-chat-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center; 
+    align-items: center; 
+    height: 844px; 
+  }
+  
+  .prompt-input {
+    margin-top: auto; 
+  }
+  
+  .prompt-input input {
+    width: 1108px; 
+    height: 56px;
+    gap: 10px;
+    border-radius: 10px;
+    border-color: #515151;
+    background-color: #262626;
+    margin-bottom: 50px;
+  }
+
+  input[type="text"]::placeholder {
+    font-family: Roboto; 
+    font-weight: 400;
+    font-size: 16px;
+    color: #999999;  
+    text-indent: 15px; 
+  }
+
+  .suggestion-prompt-container {
+    margin-top: auto;
+    display: flex;
+    margin-bottom: 30px;
+  }
+
+  .suggestion-prompt {
+    width: 440px;
+    height: 96px;
+    border-radius: 10px;
+    border-color: #515151;
+    background-color: #262626;
+    margin-left: 100px;
+  }
