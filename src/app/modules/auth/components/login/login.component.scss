@@ -1,0 +1,89 @@
+.auth-container {
+  height: 100vh;
+  box-shadow: 0px 0px 44px 0px #04233a inset;
+  background-image: url(../../../../../assets/images/roboto.png);
+  background-color: #393939;
+  background-repeat: no-repeat;
+  background-position: bottom;
+  background-size: 100% 105%;
+  display: flex;
+  justify-content: left;
+  align-items: center;
+
+  .login-container {
+    width: 33rem;
+    min-width: 24rem;
+    height: 33rem;
+    padding: 3rem;
+    margin: 10.25rem 56.25rem 14.31rem 4rem;
+    border-radius: 16px;
+    background: #515151;
+    box-shadow: 0px 4px 32px 0px rgba(0, 0, 0, 0.1);
+
+    .logo {
+      background-image: url(../../../../../assets/images/logo.png);
+      background-repeat: no-repeat;
+      height: 2.5rem;
+    }
+
+    h2,
+    h3,
+    input,
+    button {
+      padding: 1rem 0;
+    }
+
+    h2 {
+      font-size: 5.375rem;
+      font-weight: 700;
+    }
+
+    h3 {
+      font-size: 1.125rem;
+      font-weight: 500;
+    }
+
+    input {
+      display: block;
+      width: 100%;
+      border-top: none;
+      border-left: none;
+      border-right: none;
+      border-bottom: 1px solid #cccccc;
+      background: transparent;
+      outline: none;
+      margin: 0.5rem 0;
+    }
+
+    input::placeholder {
+      color: #cccccc;
+      font-size: 1.125rem;
+    }
+
+    button {
+      border-radius: 3.25rem;
+      background: #0088ea;
+      width: 100%;
+      outline: none;
+      border: none;
+      margin: 2rem 0 0.5rem 0;
+    }
+
+    p,
+    a {
+      font-size: 14px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 20px;
+      letter-spacing: 0.5px;
+    }
+
+    p {
+      text-align: center;
+    }
+
+    .input-container a {
+      float: right;
+    }
+  }
+}
