@@ -1,12 +1,19 @@
-html, 
-body { 
-    max-width: 1960px; 
-    max-height: 1080px;  
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  color: #f4f4f4;
+  font-family: Poppins, sans-serif;
+  font-size: 16px;
 }
 
-body { 
-    margin: 0; 
-    padding: 0; 
-    font-family: Roboto, "Helvetica Neue", sans-serif; 
-    background-color: #161616;
+html,
+body {
+  height: 100%;
+  background-color: #161616;
+}
+
+a {
+  color: #0088ea;
+  cursor: pointer;
 }

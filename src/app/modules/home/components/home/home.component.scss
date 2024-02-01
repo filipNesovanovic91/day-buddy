@@ -1,8 +1,8 @@
 .container {
   display: flex;
   gap: 30px;
-  width: 1440px; 
-  height: 960px; 
+  width: 1440px;
+  height: 960px;
   margin: 0 auto;
 }
 
@@ -11,7 +11,7 @@
   height: 960px;
   padding: 8px 12px 32px 12px;
   border-radius: 0px 20px 0px 0px;
-  background-color: #262626; 
+  background-color: #262626;
 }
 
 .right-container {
@@ -26,7 +26,7 @@
 .header {
   height: 64px;
   text-align: center;
-  padding-top: 8px; 
+  padding-top: 8px;
 }
 
 .logo {
@@ -34,16 +34,12 @@
   height: 64px;
 }
 
-.border-div {
-  width: 236px;
-  height: 2px;
-  background-color: #161616;
-  margin-top: 8px;
+.left-header {
+  border-bottom: 2px solid #161616;
 }
 
 .left-container-body {
   width: 212px;
   height: 746px;
-  gap: 32px; 
+  gap: 32px;
 }
-
