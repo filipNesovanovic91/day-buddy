@@ -4,6 +4,7 @@ import { HomeComponent } from './components/home/home.component';
 import { HomeRoutingModule } from './home-routing.module';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { MainChatComponent } from './components/chat/main-chat.component';
+import { ChatHistoryComponent } from './components/chat-history/chat-history.component';
 
 
 
@@ -11,7 +12,8 @@ import { MainChatComponent } from './components/chat/main-chat.component';
   declarations: [
     HomeComponent,
     NavbarComponent,
-    MainChatComponent 
+    MainChatComponent,
+    ChatHistoryComponent
   ],
   imports: [
     CommonModule,
