@@ -1,59 +1,72 @@
 .navigation {
-    width: 1148px;
-    height: 72px;
-    padding: 0 0 0 12px;
-    gap: 32px; 
-  }
-  
-  .navigation-list {
-    list-style-type: none;
-    display: flex;
-  }
-  
-  .navigation-list a {
-    text-decoration: none;
-    display: flex;
-    align-items: center;
-    width: 137px;
-    height: 48px;
-    padding: 6px 6px 6px 0;
-    border: 0px 0px 2px 0;
-    gap: 8px;
-    color: #ffffff;
-    font-size: 16px; 
-  }
-  
-  .logo-icon {
-    color: #BBBBBB;
-  }
+  width: 100%;
+  height: 72px;
+  padding: 0 0 0 12px;
+  gap: 32px;
+  display: flex;
+  justify-content: space-between;
+}
 
-  .round-element1 {
-    width: 48px;
-    height: 48px;
-    background-color: #333; /* Replace with your desired background color */
-    border-radius: 50%;
-    border: none;
-    cursor: pointer;
-    margin-left: 200px;
-    /* Add any other styles you need for the round element */
-  }
-  .round-element2 {
-    width: 48px;
-    height: 48px;
-    background-color: #333; /* Replace with your desired background color */
-    border-radius: 50%;
-    border: none;
-    cursor: pointer;
-    margin-left: 10px;
-    /* Add any other styles you need for the round element */
-  }
-  .round-element3 {
-    width: 48px;
-    height: 48px;
-    background-color: #333; /* Replace with your desired background color */
-    border-radius: 50%;
-    border: none;
-    cursor: pointer;
-    margin-left: 10px;
-    /* Add any other styles you need for the round element */
-  }
+.navigation-list {
+  display: flex;
+  gap: 32px;
+}
+
+.navigation-item {
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  height: 48px;
+  padding: 6px 6px 6px 0;
+  border: 0px 0px 2px 0;
+  gap: 8px;
+  cursor: pointer;
+}
+
+.navigation-item:hover {
+  border-bottom: 2px solid #3da7f3;
+}
+
+.navigation-item a {
+  color: #ffffff;
+  text-decoration: none;
+}
+
+.logo-icon {
+  color: #bbbbbb;
+}
+
+.icon {
+  width: 24px;
+  height: 24px;
+}
+
+.work-suport-icon {
+  background-image: url("../../../../../assets/icons/work-support.png");
+}
+.ai-assistent-icon {
+  background-image: url("../../../../../assets/icons/ai-asisstent.png");
+}
+
+.well-being-icon {
+  background-image: url("../../../../../assets/icons/well-being.png");
+}
+
+.socialize-me-icon {
+  background-image: url("../../../../../assets/icons/socialize-me.png");
+}
+
+.knowledge-base-icon {
+  background-image: url("../../../../../assets/icons/knowledge-base.png");
+}
+
+.round-element {
+  width: 48px;
+  height: 48px;
+  background-color: #333; /* Replace with your desired background color */
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+  margin-left: 10px;
+  /* Add any other styles you need for the round element */
+}
