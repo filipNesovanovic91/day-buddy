@@ -1,44 +1,41 @@
 .main-chat-container {
-    display: flex;
-    flex-direction: column;
-    justify-content: center; 
-    align-items: center; 
-    height: 844px; 
-  }
-  
-  .prompt-input {
-    margin-top: auto; 
-  }
-  
-  .prompt-input input {
-    width: 1108px; 
-    height: 56px;
-    gap: 10px;
-    border-radius: 10px;
-    border-color: #515151;
-    background-color: #262626;
-    margin-bottom: 50px;
-  }
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 90%;
+}
 
-  input[type="text"]::placeholder {
-    font-family: Roboto; 
-    font-weight: 400;
-    font-size: 16px;
-    color: #999999;  
-    text-indent: 15px; 
-  }
+.prompt-input {
+  margin-top: auto;
+}
 
-  .suggestion-prompt-container {
-    margin-top: auto;
-    display: flex;
-    margin-bottom: 30px;
-  }
+.prompt-input input {
+  width: 1108px;
+  height: 56px;
+  gap: 10px;
+  border-radius: 12px;
+  border: 1px solid #515151;
+  background-color: #262626;
+  outline: none;
+  text-indent: 2rem;
+}
 
-  .suggestion-prompt {
-    width: 440px;
-    height: 96px;
-    border-radius: 10px;
-    border-color: #515151;
-    background-color: #262626;
-    margin-left: 100px;
-  }
+.suggestion-prompt-container {
+  margin-top: auto;
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 30px;
+}
+
+.suggestion-prompt {
+  width: 440px;
+  height: 96px;
+  display: flex;
+  align-items: center;
+  border-radius: 10px;
+  border: 1px solid #515151;
+  background-color: #262626;
+  padding: 24px;
+}
