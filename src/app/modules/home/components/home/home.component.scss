@@ -1,22 +1,17 @@
 .container {
   display: flex;
-  gap: 30px;
-  width: 1440px;
-  height: 960px;
-  margin: 0 auto;
+  height: 100vh;
 }
 
 .left-container {
   width: 236px;
-  height: 960px;
   padding: 8px 12px 32px 12px;
   border-radius: 0px 20px 0px 0px;
-  background-color: #262626;
+  background: linear-gradient(180deg, #242424 0%, #383838 51.04%, #242424 100%);
 }
 
 .right-container {
-  width: 1196px;
-  height: 960px;
+  width: 100%;
   padding: 8px 24px 32px 24px;
   border-radius: 20px 0px 0px 0px;
   background-color: #262626;
@@ -30,16 +25,16 @@
 }
 
 .logo {
-  width: 212px;
-  height: 64px;
+  width: 121.301px;
+  height: 25.002px;
 }
 
 .left-header {
   border-bottom: 2px solid #161616;
+  padding: 10px;
 }
 
 .left-container-body {
   width: 212px;
-  height: 746px;
   gap: 32px;
 }
