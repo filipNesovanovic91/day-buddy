@@ -1,8 +1,9 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { AuthModel } from '../../models/auth.model';
+import { IUserAuthModel } from '../../models/auth.model';
 import { Subject, concatMap, switchMap, takeUntil, tap } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -13,7 +14,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   loginForm: FormGroup = new FormGroup({}); 
   private unsubscribe$ = new Subject<boolean>();
 
-  constructor(private authService:AuthService, private formBuilder: FormBuilder) {
+  constructor(private authService:AuthService, private formBuilder: FormBuilder, private router: Router) {
     
   }
 
@@ -32,14 +33,18 @@ export class LoginComponent implements OnInit, OnDestroy {
     const email = this.loginForm?.controls['email'].value;
     const password = this.loginForm?.controls['password'].value;
 
-    const user: AuthModel = {
+    const user: IUserAuthModel = {
       email,
       password
     }
 
     this.authService.loginUser(user).pipe(
       takeUntil(this.unsubscribe$)
-    ).subscribe();
+    ).subscribe(result => {
+      if(result.accessToken) {
+        this.router.navigate(['/home']); 
+      }
+    });
   }
 
   
