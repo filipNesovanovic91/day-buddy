@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { NotFoundComponent } from './modules/shared/components/not-found.component';
+import { AuthGuard } from './core/guards/auth.guard';
 
 const routes: Routes = [
   {
@@ -12,6 +13,7 @@ const routes: Routes = [
     path: 'home',
     loadChildren: () =>
       import('./modules/home/home.module').then((m) => m.HomeModule),
+    canActivate: [AuthGuard]
   },
   {
     path: 'work-support',
@@ -19,6 +21,7 @@ const routes: Routes = [
       import('./modules/work-support/work-support.module').then(
         (m) => m.WorkSupportModule
       ),
+    canActivate: [AuthGuard]
   },
   {
     path: 'emotional-support',
@@ -26,6 +29,7 @@ const routes: Routes = [
       import('./modules/emotional-support/emotional-support.module').then(
         (m) => m.EmotionalSupportModule
       ),
+    canActivate: [AuthGuard]
   },
   {
     path: 'virtual-coffee-break',
@@ -33,6 +37,7 @@ const routes: Routes = [
       import('./modules/virtual-coffee-break/virtual-coffee-break.module').then(
         (m) => m.VirtualCoffeeBreakModule
       ),
+    canActivate: [AuthGuard]
   },
   {
     path: 'sport-activity-organizer',
@@ -40,6 +45,7 @@ const routes: Routes = [
       import(
         './modules/sport-activity-organizer/sport-activity-organizer.module'
       ).then((m) => m.SportActivityOrganizerModule),
+    canActivate: [AuthGuard]
   },
   {
     path: 'not-found', // Define a path for the not-found component (optional)
