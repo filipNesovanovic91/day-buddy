@@ -18,7 +18,7 @@ export class AuthInterceptor implements HttpInterceptor {
                 const token = event.body.accessToken;
                 
                 if(token) {
-                    this.authService.setAccessToken(event.body.accessToken);
+                    this.authService.setAccessToken(token);
                 }
               }
             })
