@@ -16,11 +16,16 @@ export class AuthInterceptor implements HttpInterceptor {
             tap((event) => {
               if (event instanceof HttpResponse) {
                 const token = event.body.accessToken;
-                
                 if(token) {
                     this.authService.setAccessToken(token);
+                    request.clone({
+                      setHeaders: {'accessToken': token }
+                    });
+
+                    return next.handle(request);
                 }
               }
+              return next.handle(request);
             })
           );
     }
