@@ -22,4 +22,14 @@ export class HomeComponent implements OnInit, OnDestroy {
     
   }
 
+  openChat(chatId: number) {
+    if (chatId) {
+      // Implement logic to open the selected chat
+      console.log(`Opening current chat with Id ${chatId}`);
+    } else {
+      // Implement logic to start a new chat
+      console.log('Starting a new chat...');
+    }
+  }
+
 }
