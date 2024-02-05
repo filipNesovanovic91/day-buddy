@@ -1,4 +1,7 @@
 <div class="main-chat-container">
+    <div *ngFor="let message of messages$ | async" class="conversation-container"> 
+        <span>{{ message }}</span>
+    </div>
     <div class="prompt-input">
         <div class="suggestion-prompt-container">
             <div class="suggestion-prompt">
@@ -9,6 +12,11 @@
                 Find answers and insights in our Knowledge Base
             </div>
         </div>
-        <input type="text" placeholder="Message DayBuddy...">
+        <div class="input-container">
+            <input  [(ngModel)]="newMessage" type="text" placeholder="Message DayBuddy...">
+            <span class="send" (click)="sendMessage()">
+                Send
+            </span>
+        </div>
     </div>
 </div>

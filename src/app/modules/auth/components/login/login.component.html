@@ -3,26 +3,29 @@
     <h1 class="logo"></h1>
     <h2>Hi there!</h2>
     <h3>Welcome back to DayBuddy’s World!</h3>
-    <div class="input-container">
-      <input
-        type="email"
-        name="email"
-        id="email"
-        placeholder="Your email"
-        autocomplete="none"
-      />
-    </div>
-    <div class="input-container">
-      <input
-        type="password"
-        name="password"
-        id="password"
-        placeholder="Password"
-      />
-      <a>Forgot Password?</a>
-    </div>
-
-    <button routerLink="/home">Log In</button>
+    <form [formGroup]="loginForm">
+      <div class="input-container">
+        <input
+          type="email"
+          name="email"
+          id="email"
+          placeholder="Your email"
+          autocomplete="none"
+          formControlName="email"
+        />
+      </div>
+      <div class="input-container">
+        <input
+          type="password"
+          name="password"
+          id="password"
+          placeholder="Password"
+          formControlName="password"
+        />
+        <a>Forgot Password?</a>
+      </div>
+    </form>
+    <button (click)="loginUser()">Log In</button>
     <p>Don’t have an account?<a> Sign Up</a></p>
   </div>
 </div>

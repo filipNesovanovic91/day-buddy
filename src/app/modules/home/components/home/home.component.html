@@ -4,7 +4,7 @@
       <img src="../../../../../assets/svg/Logo.svg" alt="Logo" class="logo" />
     </div>
     <div class="left-container-body">
-      <app-chat-history></app-chat-history>
+      <app-chat-history (openChat)="openChat($event)"></app-chat-history>
     </div>
   </div>
 

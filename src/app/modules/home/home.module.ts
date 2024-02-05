@@ -5,6 +5,7 @@ import { HomeRoutingModule } from './home-routing.module';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { MainChatComponent } from './components/chat/main-chat.component';
 import { ChatHistoryComponent } from './components/chat-history/chat-history.component';
+import { FormsModule } from '@angular/forms';
 
 
 
@@ -17,7 +18,8 @@ import { ChatHistoryComponent } from './components/chat-history/chat-history.com
   ],
   imports: [
     CommonModule,
-    HomeRoutingModule
+    HomeRoutingModule,
+    FormsModule
   ]
 })
 export class HomeModule { }
