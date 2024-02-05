@@ -1,5 +1,3 @@
-import { Token } from "@angular/compiler";
-
-export interface ILoginResponse {
+export interface LoginResponse {
     accessToken: string;
 }

@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { IUserAuthModel } from '../../models/auth.model';
+import { UserAuthModel } from '../../models/auth.model';
 import { Subject, concatMap, switchMap, takeUntil, tap } from 'rxjs';
 import { Router } from '@angular/router';
 
@@ -33,7 +33,7 @@ export class LoginComponent implements OnInit, OnDestroy {
     const email = this.loginForm?.controls['email'].value;
     const password = this.loginForm?.controls['password'].value;
 
-    const user: IUserAuthModel = {
+    const user: UserAuthModel = {
       email,
       password
     }
