@@ -22,18 +22,13 @@ export class MessageHttpService extends CoreHttpService {
         this.connection.start().then(() => console.log('Connection opened!'));
         this.connection.on('message', (response: ChatMessageModel) => {
             console.log(response);
-            const previousMessages = this.messageUtilityService.getMessages();
-            console.log(previousMessages);
-
-          this.messageUtilityService.addMessages(this.messageUtilityService.getMessages().concat(response.messages));  
+          this.messageUtilityService.addMessages(this.messageUtilityService.getMessages().concat(response));  
         });
     }
 
-    mapMessageReponseFromSignalR(message: ChatMessageModel) {
-        let responseMessage = message.messages 
-    }
-
     sendMessage(message: string) {
+        // TODO: refactor set of token into headers
+        // Move to Auth interceptor
         const token = this.authService.getAccessToken();
 
         const headers = new HttpHeaders({
@@ -49,6 +44,8 @@ export class MessageHttpService extends CoreHttpService {
     }
 
     sendMessageToAI() {
+         // TODO: refactor set of token into headers 
+         // Move to Auth interceptor
         const token = this.authService.getAccessToken();
 
         const headers = new HttpHeaders({

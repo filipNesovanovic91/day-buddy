@@ -3,6 +3,7 @@ import { MessageUtilityService } from "../services/message-utility.service";
 import { Observable, Subject, map, take, takeUntil } from "rxjs";
 import { AuthService } from "../../../auth/services/auth.service";
 import { MessageHttpService } from "../services/message-http.service";
+import { ChatMessageModel } from "../../models/chat-message.model";
 
 @Component({
     selector: 'app-main-chat',
@@ -10,11 +11,10 @@ import { MessageHttpService } from "../services/message-http.service";
     styleUrl: './main-chat.component.scss'
 })
 export class MainChatComponent implements OnInit, OnDestroy {
-    messages$: Observable<string[]> = this.messageUtilityService.messages$;  
+    messages$: Observable<ChatMessageModel[]> = this.messageUtilityService.messages$;  
     newMessage: string = '';
     disabledInputField: boolean = true;
     private unsubscribe$ = new Subject<boolean>();
-    @ViewChild('suggestionPrompt', { static: false }) suggestionPromptRef!: ElementRef;
 
 
     constructor(private messageUtilityService: MessageUtilityService, private authService: AuthService, private messageHttpService: MessageHttpService) {
@@ -27,24 +27,29 @@ export class MainChatComponent implements OnInit, OnDestroy {
     }
 
     sendMessage() { 
+        const chatMessageModel: ChatMessageModel = {
+            ai: false,
+            buttons: [],
+            mentor: 0,
+            messages: [this.newMessage]
+        };
+
         if (this.newMessage.trim() !== '') {
-          this.messageUtilityService.addMessageToChat(`User: ${this.newMessage}`);
+          this.messageUtilityService.addMessageToChat(chatMessageModel);
           // Mock the response from the DayBaddy
           // When we added BE integration, here we will put call to the API 
           //this.messageUtilityService.addMessageToChat(`DayBaddy: Mock response...`);
-          this.messageHttpService.sendMessage(this.newMessage).pipe(
-            take(1)
-          ).subscribe(result => {
-            console.log(result)
-          })
+        //   this.messageHttpService.sendMessage(this.newMessage).pipe(
+        //     take(1)
+        //   ).subscribe(result => {
+        //     console.log(result)
+        //   })
           this.newMessage = '';
         }
     }
 
     sendMessageToAI() {
         this.disabledInputField = false;
-        // const suggestionPromptText = this.suggestionPromptRef.nativeElement.textContent;
-        // this.messageUtilityService.addMessageToChat(suggestionPromptText);
         this.messageHttpService.sendMessageToAI().pipe(
             takeUntil(this.unsubscribe$)
         ).subscribe();
