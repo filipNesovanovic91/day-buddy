@@ -40,6 +40,11 @@
   padding: 24px;
 }
 
+.suggestion-prompt:hover {
+  cursor: pointer;
+  background-color: #515151;
+}
+
 .conversation-container {
   margin: 20px; 
 }

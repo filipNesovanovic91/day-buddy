@@ -4,7 +4,7 @@
     </div>
     <div class="prompt-input">
         <div class="suggestion-prompt-container">
-            <div class="suggestion-prompt">
+            <div class="suggestion-prompt" #suggestionPrompt (click)="sendMessageToAI()">
                 Let me support you in finding the mentor
                 who can best contribute to your growth.
             </div>
@@ -13,7 +13,7 @@
             </div>
         </div>
         <div class="input-container">
-            <input  [(ngModel)]="newMessage" type="text" placeholder="Message DayBuddy...">
+            <input [disabled]="disabledInputField"  [(ngModel)]="newMessage" type="text" placeholder="Message DayBuddy...">
             <span class="send" (click)="sendMessage()">
                 Send
             </span>

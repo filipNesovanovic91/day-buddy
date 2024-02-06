@@ -18,7 +18,7 @@ export class AuthInterceptor implements HttpInterceptor {
                 const token = event.body.accessToken;
                 if(token) {
                     this.authService.setAccessToken(token);
-                    request.clone({
+                    request = request.clone({
                       setHeaders: {'accessToken': token }
                     });
 
