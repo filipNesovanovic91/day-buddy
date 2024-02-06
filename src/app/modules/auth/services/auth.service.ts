@@ -2,8 +2,8 @@ import { Injectable } from "@angular/core";
 import { CoreHttpService } from "../../../core/http/core-http.service";
 import { HttpClient } from "@angular/common/http";
 import { Observable, tap } from "rxjs";
-import { IUserAuthModel } from "../models/auth.model";
-import { ILoginResponse } from "../models/login-response.model";
+import { UserAuthModel } from "../models/auth.model";
+import { LoginResponse } from "../models/login-response.model";
 
 @Injectable({
     providedIn: 'root',
@@ -15,8 +15,8 @@ export class AuthService extends CoreHttpService {
         super(http);
     }
 
-    public loginUser(authModel: IUserAuthModel): Observable<ILoginResponse> {
-        return this.post<ILoginResponse>(`Auth`, authModel);
+    public loginUser(authModel: UserAuthModel): Observable<LoginResponse> {
+        return this.post<LoginResponse>(`Auth`, authModel);
     }
 
     setAccessToken(token: string): void {

@@ -1,9 +1,9 @@
 <div class="chat-history-container">
     <button (click)="startNewChat()">New Chat</button>
-    <div class="chat-history" *ngFor="let chat of chatHistory" (click)="selectChat(chat.chatId)">
+    <div class="chat-history" *ngFor="let chat of chatHistory" (click)="selectChat(chat.id)">
         <div class="chat-history-item">
-            <div class="chat-date">{{ chat.title }}</div>
-            <div class="content">{{ chat.content }}</div>
+            <div class="chat-date">{{ chat.updatedDate }}</div>
+            <div class="content">{{ chat.name }}</div>
         </div>
     </div>
 </div>

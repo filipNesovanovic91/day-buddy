@@ -40,6 +40,11 @@
   padding: 24px;
 }
 
+.suggestion-prompt:hover {
+  cursor: pointer;
+  background-color: #515151;
+}
+
 .conversation-container {
   margin: 20px; 
 }
@@ -48,4 +53,24 @@
   position: absolute;
   right: 17%; 
   bottom: 7.5%; 
+}
+
+.buttons {
+  margin-top: 10px;
+}
+
+.buttons button {
+  margin-right: 5px;
+  padding: 8px 12px;
+  background-color: #262626;
+  color: #fff;
+  border: 1px solid #515151;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.buttons button:hover {
+  cursor: pointer;
+  background-color: #515151;
 }

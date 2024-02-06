@@ -1,5 +1,5 @@
 import { Component, EventEmitter, OnDestroy, OnInit, Output } from "@angular/core";
-import { IChatHistory } from "../../models/chat-history.model";
+import { ChatHistory } from "../../models/chat-history.model";
 
 @Component({
     selector: 'app-chat-history',
@@ -9,8 +9,8 @@ import { IChatHistory } from "../../models/chat-history.model";
 export class ChatHistoryComponent implements OnInit, OnDestroy {
     @Output() openChat = new EventEmitter<number>();
      // Mock chat history data
-     chatHistory: IChatHistory[] = [
-        { chatId: 1, userId: 1, createdAt: new Date(), content: 'Hi there!', isCurrent: false, title: 'Monday', updatedAt: new Date()}
+     chatHistory: ChatHistory[] = [
+        { id: 1, name: 'Hi there!', current: false, updatedDate: new Date() }
     ];
 
     constructor() {
