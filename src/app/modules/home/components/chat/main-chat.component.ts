@@ -4,6 +4,7 @@ import { Observable, Subject, map, take, takeUntil } from "rxjs";
 import { AuthService } from "../../../auth/services/auth.service";
 import { MessageHttpService } from "../services/message-http.service";
 import { ChatMessageModel } from "../../models/chat-message.model";
+import { ChatButton } from "../../models/chat-button.model";
 
 @Component({
     selector: 'app-main-chat',
@@ -24,6 +25,21 @@ export class MainChatComponent implements OnInit, OnDestroy {
     ngOnInit(): void {
         this.messageHttpService.listenSignalR();
         
+    }
+    
+    disableButtonsAfterSelect(indexClicked: number, buttons: ChatButton[], api: string): void {
+        buttons.forEach((button, index) => {
+          button.selected = index !== indexClicked;
+        }); 
+
+        const urlApi = api.indexOf("chat/");
+        const endpoint = api.substring(urlApi);
+
+        this.messageHttpService.callApiFromButton(endpoint)
+        .pipe(
+            take(1)
+        )
+        .subscribe();
     }
 
     sendMessage() { 
