@@ -4,25 +4,31 @@
   justify-content: center;
   align-items: center;
   height: 90%;
+  margin: 0 15%;
 }
 
 .prompt-input {
   margin-top: auto;
+  width: 100%;
 }
 
 .prompt-input input {
-  width: 1108px;
+  width: 100%;
   height: 56px;
   gap: 10px;
   border-radius: 12px;
   border: 1px solid #515151;
   background-color: #262626;
   outline: none;
-  text-indent: 2rem;
+  padding: 16px;
+}
+
+.prompt-input input:disabled {
+  cursor: not-allowed;
 }
 
 .suggestion-prompt-container {
-  margin-top: auto;
+  margin: auto 5%;
   display: flex;
   justify-content: center;
   gap: 12px;
@@ -46,13 +52,25 @@
 }
 
 .conversation-container {
-  margin: 20px; 
+  margin-bottom: 20px;
+  width: 100%;
+}
+.send-icon {
+  background-image: url("../../../../../assets/icons/send.png");
 }
 
-.send {
+.input-container {
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.input-container span {
+  width: 40px;
+  height: 40px;
   position: absolute;
-  right: 17%; 
-  bottom: 7.5%; 
+  right: 16px;
+  cursor: pointer;
 }
 
 .buttons {
@@ -62,15 +80,43 @@
 .buttons button {
   margin-right: 5px;
   padding: 8px 12px;
-  background-color: #262626;
+
+  border: 1px solid #ff7a00;
+  background: rgba(255, 122, 0, 0.1);
   color: #fff;
-  border: 1px solid #515151;
+
   border-radius: 25px;
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
 
+.buttons button:disabled {
+  background-color: #262626;
+  border: 1px solid #ccc;
+  cursor: not-allowed !important;
+}
+
 .buttons button:hover {
   cursor: pointer;
   background-color: #515151;
+}
+
+.message p {
+  margin: 10px 0;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.robot-head-icon {
+  background-image: url("../../../../../assets/icons/robot-head.png");
+}
+
+.chat-icon {
+  display: block;
+  width: 22px;
+  height: 22px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
 }
