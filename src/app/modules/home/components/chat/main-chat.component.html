@@ -8,9 +8,9 @@
 
         <!-- Display Buttons -->
         <div class="buttons" *ngIf="message.buttons && message.buttons.length > 0">
-            <div *ngFor="let button of message.buttons">
+            <div *ngFor="let button of message.buttons; let i = index;"> 
                 <br>
-                <button>
+                <button [disabled]="button.selected" (click)="disableButtonsAfterSelect(i, message.buttons, button.api)">
                     {{ button.name }} 
                 </button>
             </div>

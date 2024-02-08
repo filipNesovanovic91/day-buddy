@@ -43,6 +43,23 @@ export class MessageHttpService extends CoreHttpService {
         return this.post<any>(`new-message`, message, options);
     }
 
+    callApiFromButton(api: string) {
+        // TODO: refactor set of token into headers 
+         // Move to Auth interceptor
+        const token = this.authService.getAccessToken();
+
+        const headers = new HttpHeaders({
+            'Authorization': 'Bearer ' + token  
+        });
+    
+        // Set options with headers
+        const options = {
+            headers: headers
+        };
+
+        return this.get<any>(api, '', options);
+    }
+
     sendMessageToAI() {
          // TODO: refactor set of token into headers 
          // Move to Auth interceptor
