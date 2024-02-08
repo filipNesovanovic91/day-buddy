@@ -5,7 +5,7 @@
 }
 
 .chat-history {
-  margin-top: 15px;  
+  margin-top: 15px;
 }
 
 .chat-history-item {
@@ -14,18 +14,26 @@
   transition: background-color 0.3s ease;
 }
 
-.chat-history-item:hover {
-  background-color: #f4f4f4; 
-  color: #333
+.new-chat-icon {
+  background-image: url("../../../../../assets/icons/new-chat.png");
 }
 
-.chat-date{
+button span {
+  display: block;
+}
+
+.chat-history-item:hover {
+  background-color: #f4f4f4;
+  color: #333;
+}
+
+.chat-date {
   font-weight: bold;
-  color: #999; 
+  color: #999;
 }
 
 .content {
-  color: #f4f4f4; 
+  color: #f4f4f4;
   margin-top: 10px;
 }
 
@@ -35,10 +43,12 @@ button {
   margin-top: 20px;
   padding: 6px 12px;
   background-color: #333;
-  gap: 12px; 
-  color: white;
+  gap: 12px;
+  color: #f4f4f4;
   border: none;
   border-radius: 6px;
   cursor: pointer;
   transition: background-color 0.3s ease;
+  display: flex;
+  align-items: center;
 }

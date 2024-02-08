@@ -1,38 +1,50 @@
 <div class="main-chat-container">
-    <div *ngFor="let message of messages$ | async" class="conversation-container"> 
-        <!-- Display Messages -->
-        <div class="message" *ngFor="let msg of message.messages">
-            <br>
-            {{ msg }}
-        </div>
+  <div *ngFor="let message of messages$ | async" class="conversation-container">
+    <!-- Display Messages -->
+    <div class="message" *ngFor="let msg of message.messages">
+      <p>
+        <span
+          [ngClass]="message.ai ? 'robot-head-icon' : ''"
+          class="chat-icon"
+        ></span>
+        {{ message.ai ? "DayBuddy" : "You" }}
+      </p>
+      <p>{{ msg }}</p>
+    </div>
 
-        <!-- Display Buttons -->
-        <div class="buttons" *ngIf="message.buttons && message.buttons.length > 0">
-            <div *ngFor="let button of message.buttons; let i = index;"> 
-                <br>
-                <button [disabled]="button.selected" (click)="disableButtonsAfterSelect(i, message.buttons, button.api)">
-                    {{ button.name }} 
-                </button>
-            </div>
-        </div>
+    <!-- Display Buttons -->
+    <div class="buttons" *ngIf="message.buttons && message.buttons.length > 0">
+      <div *ngFor="let button of message.buttons; let i = index">
+        <br />
+        <button
+          [disabled]="button.selected"
+          (click)="disableButtonsAfterSelect(i, message.buttons, button.api)"
+        >
+          {{ button.name }}
+        </button>
+      </div>
     </div>
-    <div class="prompt-input">
-        <div class="suggestion-prompt-container">
-            <ng-container *ngIf="disabledInputField"> 
-                <div class="suggestion-prompt" (click)="sendMessageToAI()">
-                    Let me support you in finding the mentor
-                    who can best contribute to your growth.
-                </div>
-                <div class="suggestion-prompt">
-                    Find answers and insights in our Knowledge Base
-                </div>
-            </ng-container>
+  </div>
+  <div class="prompt-input">
+    <div class="suggestion-prompt-container">
+      <ng-container *ngIf="disabledInputField">
+        <div class="suggestion-prompt" (click)="sendMessageToAI()">
+          Let me support you in finding the mentor who can best contribute to
+          your growth.
         </div>
-        <div class="input-container">
-            <input [disabled]="disabledInputField"  [(ngModel)]="newMessage" type="text" placeholder="Message DayBuddy...">
-            <span class="send" (click)="sendMessage()">
-                Send
-            </span>
+        <div class="suggestion-prompt">
+          Find answers and insights in our Knowledge Base
         </div>
+      </ng-container>
     </div>
+    <div class="input-container">
+      <input
+        [disabled]="disabledInputField"
+        [(ngModel)]="newMessage"
+        type="text"
+        placeholder="Message DayBuddy..."
+      />
+      <span class="send-icon" (click)="sendMessage()"> </span>
+    </div>
+  </div>
 </div>
