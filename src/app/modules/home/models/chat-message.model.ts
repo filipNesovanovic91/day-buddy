@@ -1,8 +1,9 @@
 import { ChatButton } from "./chat-button.model";
+import { MentorModel } from "./mentor.model";
 
 export interface ChatMessageModel {
     ai: boolean;
     buttons: ChatButton[];
-    mentor: number;
+    mentors: MentorModel[];
     messages: string[];
 }
