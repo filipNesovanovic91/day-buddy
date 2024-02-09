@@ -24,6 +24,20 @@
         </button>
       </div>
     </div>
+    <!-- Display Mentors -->
+    <div class="mentors" *ngIf="message.mentors && message.mentors.length > 0">
+      <div *ngFor="let mentor of message.mentors; let i = index">
+        <br />
+        <div>
+          <br>
+          <div>{{mentor.firstName}} {{mentor.lastName}}</div>
+          <br>
+          <div>{{mentor.jobTitle}} {{mentor.email}}</div>
+          <br>
+          <div>{{mentor.matchPercent}}</div>
+        </div>
+      </div>
+    </div>
   </div>
   <div class="prompt-input">
     <div class="suggestion-prompt-container">

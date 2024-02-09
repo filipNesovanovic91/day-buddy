@@ -6,6 +6,7 @@ import { environment } from '../../../../../environments/environment';
 import { MessageUtilityService } from "./message-utility.service";
 import { AuthService } from "../../../auth/services/auth.service";
 import { ChatMessageModel } from "../../models/chat-message.model";
+import { NewMessage } from "../../models/new-message.model";
 
 @Injectable({
     providedIn: 'root',
@@ -40,7 +41,15 @@ export class MessageHttpService extends CoreHttpService {
             headers: headers
         };
 
-        return this.post<any>(`new-message`, message, options);
+        let chatId = this.messageUtilityService.getChatId();
+        
+
+        const messageBody: NewMessage = {
+            chatId: chatId,
+            message: message
+        };
+
+        return this.post<any>(`new-message`, messageBody, options);
     }
 
     callApiFromButton(api: string) {
@@ -74,7 +83,7 @@ export class MessageHttpService extends CoreHttpService {
             headers: headers
         };
 
-        return this.post<any>(`Chat`, {}, options);  
+        return this.post<any>(`chats`, {}, options);  
     }
 
 }

@@ -1,6 +1,6 @@
 import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from "@angular/core";
 import { MessageUtilityService } from "../services/message-utility.service";
-import { Observable, Subject, map, take, takeUntil } from "rxjs";
+import { Observable, Subject, map, take, takeUntil, tap } from "rxjs";
 import { AuthService } from "../../../auth/services/auth.service";
 import { MessageHttpService } from "../services/message-http.service";
 import { ChatMessageModel } from "../../models/chat-message.model";
@@ -43,23 +43,8 @@ export class MainChatComponent implements OnInit, OnDestroy {
     }
 
     sendMessage() { 
-        const chatMessageModel: ChatMessageModel = {
-            ai: false,
-            buttons: [],
-            mentor: 0,
-            messages: [this.newMessage]
-        };
-
         if (this.newMessage.trim() !== '') {
-          this.messageUtilityService.addMessageToChat(chatMessageModel);
-          // Mock the response from the DayBaddy
-          // When we added BE integration, here we will put call to the API 
-          //this.messageUtilityService.addMessageToChat(`DayBaddy: Mock response...`);
-        //   this.messageHttpService.sendMessage(this.newMessage).pipe(
-        //     take(1)
-        //   ).subscribe(result => {
-        //     console.log(result)
-        //   })
+                    this.messageHttpService.sendMessage(this.newMessage).subscribe();
           this.newMessage = '';
         }
     }
@@ -67,7 +52,10 @@ export class MainChatComponent implements OnInit, OnDestroy {
     sendMessageToAI() {
         this.disabledInputField = false;
         this.messageHttpService.sendMessageToAI().pipe(
-            takeUntil(this.unsubscribe$)
+            takeUntil(this.unsubscribe$),
+            tap((response) =>{
+                this.messageUtilityService.setChatId(response?.chatId)
+            })
         ).subscribe();
     }
 
