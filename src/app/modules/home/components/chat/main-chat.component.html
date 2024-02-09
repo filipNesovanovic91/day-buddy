@@ -1,40 +1,76 @@
 <div class="main-chat-container">
-  <div *ngFor="let message of messages$ | async" class="conversation-container">
-    <!-- Display Messages -->
-    <div class="message" *ngFor="let msg of message.messages">
-      <p>
-        <span
-          [ngClass]="message.ai ? 'robot-head-icon' : ''"
-          class="chat-icon"
-        ></span>
-        {{ message.ai ? "DayBuddy" : "You" }}
-      </p>
-      <p>{{ msg }}</p>
-    </div>
-
-    <!-- Display Buttons -->
-    <div class="buttons" *ngIf="message.buttons && message.buttons.length > 0">
-      <div *ngFor="let button of message.buttons; let i = index">
-        <br />
-        <button
-          [disabled]="button.selected"
-          (click)="disableButtonsAfterSelect(i, message.buttons, button.api)"
-        >
-          {{ button.name }}
-        </button>
+  <div class="converzation-wrapper">
+    <div
+      *ngFor="let message of messages$ | async"
+      class="conversation-container"
+    >
+      <!-- Display Messages -->
+      <div class="message" *ngFor="let msg of message.messages">
+        <p>
+          <span
+            [ngClass]="message.ai ? 'robot-head-icon' : ''"
+            class="chat-icon"
+          ></span>
+          {{ message.ai ? "DayBuddy" : "You" }}
+        </p>
+        <p>{{ msg }}</p>
       </div>
-    </div>
-    <!-- Display Mentors -->
-    <div class="mentors" *ngIf="message.mentors && message.mentors.length > 0">
-      <div *ngFor="let mentor of message.mentors; let i = index">
-        <br />
-        <div>
-          <br>
-          <div>{{mentor.firstName}} {{mentor.lastName}}</div>
-          <br>
-          <div>{{mentor.jobTitle}} {{mentor.email}}</div>
-          <br>
-          <div>{{mentor.matchPercent}}</div>
+
+      <!-- Display Buttons -->
+      <div
+        class="buttons"
+        *ngIf="message.buttons && message.buttons.length > 0"
+      >
+        <div *ngFor="let button of message.buttons; let i = index">
+          <br />
+          <button
+            [disabled]="button.selected"
+            (click)="disableButtonsAfterSelect(i, message.buttons, button.api)"
+          >
+            {{ button.name }}
+          </button>
+        </div>
+      </div>
+      <!-- Display Mentors -->
+      <div
+        class="mentors-container"
+        *ngIf="message.mentors && message.mentors.length > 0"
+      >
+        <div
+          *ngFor="let mentor of message.mentors; let i = index"
+          class="single-mentor-container"
+        >
+          <div class="inner-container">
+            <div class="profile-info">
+              <img
+                src="{{ mentor.img }}"
+                alt="{{ mentor.img }}"
+                class="mentor-img"
+              />
+              <div class="mentor-data">
+                <p class="profile-match">
+                  {{ mentor.matchPercent }}% Match - View Mentor Profile
+                </p>
+                <p class="mentor-name">
+                  {{ mentor.firstName }} {{ mentor.lastName }}
+                </p>
+                <p class="mentor-title">{{ mentor.jobTitle }}</p>
+              </div>
+            </div>
+            <div class="action-buttons">
+              <button>Message</button>
+              <a>Schedule a meeting</a>
+            </div>
+          </div>
+          <!-- <br />
+          <div>
+            <br />
+            <div>{{ mentor.firstName }} {{ mentor.lastName }}</div>
+            <br />
+            <div>{{ mentor.jobTitle }} {{ mentor.email }}</div>
+            <br />
+            <div>{{ mentor.matchPercent }}</div> -->
+          <!-- </div> -->
         </div>
       </div>
     </div>
