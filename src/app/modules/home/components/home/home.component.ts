@@ -1,5 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { AuthService } from '../../../auth/services/auth.service';
+import { MessageHttpService } from '../services/message-http.service';
+import { ChatHistory } from '../../models/chat-history.model';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-home',
@@ -8,7 +11,9 @@ import { AuthService } from '../../../auth/services/auth.service';
 })
 export class HomeComponent implements OnInit, OnDestroy {
 
-  constructor(private authService: AuthService) {
+  chatHistory$: Observable<ChatHistory[]> = this.messageHttpService.getChatHistory(); 
+
+  constructor(private authService: AuthService, private messageHttpService: MessageHttpService) {
 
   }
 

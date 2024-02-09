@@ -44,8 +44,8 @@ export class MainChatComponent implements OnInit, OnDestroy {
 
     sendMessage() { 
         if (this.newMessage.trim() !== '') {
-                    this.messageHttpService.sendMessage(this.newMessage).subscribe();
-          this.newMessage = '';
+            this.messageHttpService.sendMessage(this.newMessage).subscribe();
+            this.newMessage = '';
         }
     }
 

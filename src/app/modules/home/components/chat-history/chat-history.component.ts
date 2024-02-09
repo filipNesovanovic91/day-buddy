@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnDestroy, OnInit, Output } from "@angular/core";
+import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from "@angular/core";
 import { ChatHistory } from "../../models/chat-history.model";
 
 @Component({
@@ -7,11 +7,8 @@ import { ChatHistory } from "../../models/chat-history.model";
     styleUrl: './chat-history.component.scss'
 })
 export class ChatHistoryComponent implements OnInit, OnDestroy {
+    @Input() chatHistory: ChatHistory[] = [];
     @Output() openChat = new EventEmitter<number>();
-     // Mock chat history data
-     chatHistory: ChatHistory[] = [
-        { id: 1, name: 'Hi there!', current: false, updatedDate: new Date() }
-    ];
 
     constructor() {
 

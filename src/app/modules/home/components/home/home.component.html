@@ -4,7 +4,9 @@
       <img src="../../../../../assets/svg/Logo.svg" alt="Logo" class="logo" />
     </div>
     <div class="left-container-body">
-      <app-chat-history (openChat)="openChat($event)"></app-chat-history>
+      <ng-container *ngIf="(chatHistory$ | async) as chatHistory">
+        <app-chat-history [chatHistory]="chatHistory" (openChat)="openChat($event)"></app-chat-history>
+      </ng-container>
     </div>
   </div>
 
