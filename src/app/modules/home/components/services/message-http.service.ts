@@ -7,6 +7,8 @@ import { MessageUtilityService } from "./message-utility.service";
 import { AuthService } from "../../../auth/services/auth.service";
 import { ChatMessageModel } from "../../models/chat-message.model";
 import { NewMessage } from "../../models/new-message.model";
+import { ChatHistory } from "../../models/chat-history.model";
+import { map } from "rxjs";
 
 @Injectable({
     providedIn: 'root',
@@ -83,7 +85,33 @@ export class MessageHttpService extends CoreHttpService {
             headers: headers
         };
 
-        return this.post<any>(`chats`, {}, options);  
+        return this.post<any>(`chats`, {}, options);   
+    }
+
+    getChatHistory() {
+        // TODO: refactor set of token into headers 
+         // Move to Auth interceptor
+         const token = this.authService.getAccessToken();
+
+         const headers = new HttpHeaders({
+             'Authorization': 'Bearer ' + token 
+         });
+     
+         // Set options with headers
+         const options = {
+             headers: headers
+         };
+
+        return this.get<ChatHistory[]>(`chats`, '', options).pipe(
+            map(chatHistory => {
+              const currentDate = new Date();
+              return chatHistory.map(item => {
+                const updatedAtDate = new Date(item.updatedAt);
+                item.updatedAt = this.messageUtilityService.getFormatedChatHistoryTitle(currentDate, updatedAtDate);
+                return item;
+              });
+            })
+        );
     }
 
 }
