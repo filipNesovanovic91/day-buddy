@@ -1,4 +1,4 @@
-import { Component, Input, OnDestroy, OnInit, SimpleChanges, ViewChild } from "@angular/core";
+import { Component, Input, OnDestroy, OnInit, Renderer2, SimpleChanges, ViewChild } from "@angular/core";
 
 import { Observable, Subject, map, take, takeUntil, tap } from "rxjs";
 import { AuthService } from "../../../auth/services/auth.service";
@@ -7,6 +7,7 @@ import { ChatButton } from "../../models/chat-button.model";
 import { MessageUtilityService } from "../../services/message-utility.service";
 import { MessageHttpService } from "../../services/message-http.service";
 import { ActivatedRoute } from "@angular/router";
+import { MentorModel } from "../../models/mentor.model";
 
 @Component({
     selector: 'app-main-chat',
@@ -19,10 +20,11 @@ export class MainChatComponent implements OnInit, OnDestroy {
     messages$: Observable<ChatMessageModel[]> = this.messageUtilityService.messages$;  
     newMessage: string = '';
     disabledInputField: boolean = true; 
+    profileMentor?: MentorModel;
     private unsubscribe$ = new Subject<boolean>();
 
 
-    constructor(private messageUtilityService: MessageUtilityService, private messageHttpService: MessageHttpService, private activatedRouter: ActivatedRoute) {
+    constructor(private messageUtilityService: MessageUtilityService, private messageHttpService: MessageHttpService, private activatedRouter: ActivatedRoute, private renderer: Renderer2) {
         
     }
 
@@ -73,6 +75,17 @@ export class MainChatComponent implements OnInit, OnDestroy {
                 this.messageUtilityService.setChatId(response?.chatId)
             })
         ).subscribe();
+    }
+
+    openModal(mentor: MentorModel) {
+      const modal = document.getElementById('modal');
+      this.renderer.addClass(modal, 'display-block');
+      this.profileMentor = mentor;
+    }
+  
+    exitModal() {
+      const modal = document.getElementById('modal');
+      this.renderer.removeClass(modal, 'display-block');
     }
 
     ngOnDestroy(): void {
