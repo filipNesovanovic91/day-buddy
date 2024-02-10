@@ -5,13 +5,13 @@
     </div>
     <div class="left-container-body">
       <ng-container *ngIf="(chatHistory$ | async) as chatHistory">
-        <app-chat-history [chatHistory]="chatHistory" (openChat)="openChat($event)"></app-chat-history>
-      </ng-container>
+        <app-chat-history [chatHistory]="chatHistory" (reloadChatHistory)="refreshChatHistory()"></app-chat-history>
+      </ng-container> 
     </div>
   </div>
 
   <div class="right-container">
     <app-navbar></app-navbar>
-    <app-main-chat></app-main-chat>
+    <router-outlet></router-outlet> 
   </div>
 </div>

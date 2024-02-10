@@ -1,5 +1,7 @@
 import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from "@angular/core";
 import { ChatHistory } from "../../models/chat-history.model";
+import { Router } from "@angular/router";
+import { MessageUtilityService } from "../../services/message-utility.service";
 
 @Component({
     selector: 'app-chat-history',
@@ -8,9 +10,9 @@ import { ChatHistory } from "../../models/chat-history.model";
 })
 export class ChatHistoryComponent implements OnInit, OnDestroy {
     @Input() chatHistory: ChatHistory[] = [];
-    @Output() openChat = new EventEmitter<number>();
+    @Output() reloadChatHistory = new EventEmitter<void>();
 
-    constructor() {
+    constructor(private router: Router, private messageUtilityService: MessageUtilityService) {
 
     }
 
@@ -19,13 +21,27 @@ export class ChatHistoryComponent implements OnInit, OnDestroy {
     }
 
     selectChat(chatId: number) {
+        this.reloadChatHistory.emit();
         // Emit an event to inform the parent component to open the selected chat
-        this.openChat.emit(chatId);
+        this.router.routeReuseStrategy.shouldReuseRoute = function () {
+            return false; 
+        };
+        this.router.navigate(['home/chat/' + chatId]); 
     }
 
     startNewChat() {
+        const chatId = this.messageUtilityService.getChatId();
+        if(chatId > 0) {
+            this.reloadChatHistory.emit();
+        }
         // Emit an event to inform the parent component to start a new chat
-        this.openChat.emit(0); 
+        this.router.routeReuseStrategy.shouldReuseRoute = function () {
+            return false; 
+        };
+
+        this.router.onSameUrlNavigation = 'reload';
+
+        this.router.navigate(['home/chat']); 
     }
 
 
