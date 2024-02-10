@@ -48,6 +48,11 @@ const routes: Routes = [
     canActivate: [AuthGuard]
   },
   {
+    path: '',
+    pathMatch: 'full',
+    redirectTo: '/'  
+  },
+  {
     path: 'not-found', // Define a path for the not-found component (optional)
     component: NotFoundComponent, // Component to be displayed for not-found
   },

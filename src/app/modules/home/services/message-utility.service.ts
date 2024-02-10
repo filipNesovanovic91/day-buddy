@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
-import { ChatMessageModel } from '../../models/chat-message.model';
+import { BehaviorSubject } from 'rxjs'; 
+import { ChatMessageModel } from '../models/chat-message.model';
 
 @Injectable({
   providedIn: 'root',

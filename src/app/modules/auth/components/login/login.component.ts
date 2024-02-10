@@ -42,7 +42,7 @@ export class LoginComponent implements OnInit, OnDestroy {
       takeUntil(this.unsubscribe$)
     ).subscribe(result => {
       if(result.accessToken) {
-        this.router.navigate(['/home']); 
+        this.router.navigate(['/home/chat']);  
       }
     });
   }
