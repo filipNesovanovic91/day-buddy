@@ -22,7 +22,7 @@ export abstract class CoreHttpService {
    */
   protected get<T>(slug: string, queryParams: string = '', options: HttpOptions | null = null): Observable<T> {
     if (queryParams) {
-      slug += `?${queryParams}`;
+      slug += `${queryParams}`;
     }
     return this.http.get<T>(`${this.WEB_SERVICE_ADDRESS}${slug}`, { ...options });
   }

@@ -14,16 +14,16 @@ import { ChatButton } from "../../models/chat-button.model";
 export class MainChatComponent implements OnInit, OnDestroy {
     messages$: Observable<ChatMessageModel[]> = this.messageUtilityService.messages$;  
     newMessage: string = '';
-    disabledInputField: boolean = true;
+    disabledInputField: boolean = true; 
     private unsubscribe$ = new Subject<boolean>();
 
 
-    constructor(private messageUtilityService: MessageUtilityService, private authService: AuthService, private messageHttpService: MessageHttpService) {
+    constructor(private messageUtilityService: MessageUtilityService, private messageHttpService: MessageHttpService) {
 
     }
 
     ngOnInit(): void {
-        this.messageHttpService.listenSignalR();
+        this.messageHttpService.connectSignalR();
         
     }
     
@@ -50,7 +50,7 @@ export class MainChatComponent implements OnInit, OnDestroy {
     }
 
     sendMessageToAI() {
-        this.disabledInputField = false;
+        this.disabledInputField = false; 
         this.messageHttpService.sendMessageToAI().pipe(
             takeUntil(this.unsubscribe$),
             tap((response) =>{

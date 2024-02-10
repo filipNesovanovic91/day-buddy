@@ -8,7 +8,8 @@ import { AuthService } from "../../../auth/services/auth.service";
 import { ChatMessageModel } from "../../models/chat-message.model";
 import { NewMessage } from "../../models/new-message.model";
 import { ChatHistory } from "../../models/chat-history.model";
-import { map } from "rxjs";
+import { Observable, map } from "rxjs";
+import { ExistingChatModel } from "../../models/existing-chat.model";
 
 @Injectable({
     providedIn: 'root',
@@ -21,12 +22,33 @@ export class MessageHttpService extends CoreHttpService {
         super(http);
     }
 
-    listenSignalR() {
+    connectSignalR() {
         this.connection.start().then(() => console.log('Connection opened!'));
         this.connection.on('message', (response: ChatMessageModel) => {
             console.log(response);
           this.messageUtilityService.addMessages(this.messageUtilityService.getMessages().concat(response));  
         });
+    }
+
+    reconnectSignalR() {
+        if (this.connection) {
+            // Check if the connection is in the 'Connected' state or not
+            if (this.connection.state === "Connected") {
+                // If it's in the 'Connected' state, stop the connection
+                this.connection.stop().then(() => {
+                    console.log('Connection closed!');
+                    // After the connection is stopped, reset UI and start a new connection
+                    this.messageUtilityService.resetChatUI();
+                    this.connectSignalR();
+                }).catch(error => {
+                    console.error('Error closing connection:', error);
+                    // Handle error if there's an issue stopping the connection
+                });
+            } else if (this.connection.state === "Disconnected") {
+                // If it's in the 'Disconnected' or 'Connecting' state, simply start a new connection
+                this.connectSignalR();
+            }
+        }
     }
 
     sendMessage(message: string) {
@@ -112,6 +134,22 @@ export class MessageHttpService extends CoreHttpService {
               });
             })
         );
+    }
+
+    setSavedChatOnUI(chatId: number): Observable<ExistingChatModel> {
+        const token = this.authService.getAccessToken();
+
+        const headers = new HttpHeaders({
+            'Authorization': 'Bearer ' + token 
+        });
+    
+        // Set options with headers
+        const options = {
+            headers: headers
+        };
+
+        return this.get<ExistingChatModel>('chats/', `${chatId}`, options); 
+
     }
 
 }
