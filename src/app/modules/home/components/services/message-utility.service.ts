@@ -8,7 +8,7 @@ import { ChatMessageModel } from '../../models/chat-message.model';
 export class MessageUtilityService {
   private messagesSubject$ = new BehaviorSubject<ChatMessageModel[]>([]);
   public messages$ = this.messagesSubject$.asObservable();
-  public chatId: number = 0; 
+  public chatId: number = 0;  
 
   constructor() {
 
@@ -26,6 +26,10 @@ export class MessageUtilityService {
     const currentMessages = this.messagesSubject$.value;
     const updatedMessages = [...currentMessages, message];
     this.messagesSubject$.next(updatedMessages);
+  }
+
+  resetChatUI() {
+    this.messagesSubject$.next([]);
   }
 
   setChatId(chatId: number) {
