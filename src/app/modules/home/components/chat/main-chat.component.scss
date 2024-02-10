@@ -199,3 +199,79 @@
   font-size: 12px;
   font-weight: 500;
 }
+
+.exit {
+  position: absolute;
+  top: 1%;
+  right: 1%;
+  background-color: #333333;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background-image: url("../../../../../assets/icons/exit.png");
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.cover-image {
+  background-image: url("../../../../../assets/images/cover.png");
+  height: 236px;
+}
+
+.profile-page {
+  overflow: auto;
+  margin: 1% 5%;
+}
+
+.profile-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.profile-picture {
+  height: 96px;
+  border-radius: 50%;
+}
+
+.profile-page-info {
+  text-align: left;
+}
+
+.profile-name {
+  font-size: 20px;
+  font-weight: 500;
+  color: #ccc;
+}
+
+.profile-job {
+  font-size: 14px;
+  font-weight: 400;
+  color: #ccc;
+}
+.buttons-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+}
+
+.buttons-container a {
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.buttons-container button {
+  display: flex;
+  font-size: 12px;
+  width: 140px;
+  height: 30px;
+  padding: 6px 12px;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
+  border-radius: 16px;
+  background: #0088ea;
+  border: none;
+}
