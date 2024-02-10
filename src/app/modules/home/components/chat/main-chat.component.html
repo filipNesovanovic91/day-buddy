@@ -41,7 +41,7 @@
           class="single-mentor-container"
         >
           <div class="inner-container">
-            <div class="profile-info">
+            <div class="profile-info" (click)="openModal(mentor)">
               <img
                 src="{{ mentor.img }}"
                 alt="{{ mentor.img }}"
@@ -62,15 +62,6 @@
               <a>Schedule a meeting</a>
             </div>
           </div>
-          <!-- <br />
-          <div>
-            <br />
-            <div>{{ mentor.firstName }} {{ mentor.lastName }}</div>
-            <br />
-            <div>{{ mentor.jobTitle }} {{ mentor.email }}</div>
-            <br />
-            <div>{{ mentor.matchPercent }}</div> -->
-          <!-- </div> -->
         </div>
       </div>
     </div>
@@ -95,6 +86,34 @@
         placeholder="Message DayBuddy..."
       />
       <span class="send-icon" (click)="sendMessage()"> </span>
+    </div>
+  </div>
+</div>
+
+<div class="overlay" id="modal">
+  <div class="modal">
+    <div class="exit" (click)="exitModal()"></div>
+    <div class="cover-image"></div>
+    <div class="profile-page">
+      <div class="inner-container">
+        <div class="profile-container">
+          <img
+            src="{{ profileMentor?.img }}"
+            alt="{{ profileMentor?.img }}"
+            class="profile-picture"
+          />
+          <div class="profile-page-info">
+            <p class="profile-name">
+              {{ profileMentor?.firstName }} {{ profileMentor?.lastName }}
+            </p>
+            <p class="profile-job">{{ profileMentor?.jobTitle }}</p>
+          </div>
+        </div>
+        <div class="buttons-container">
+          <a>Schedule a meeting</a>
+          <button>Message</button>
+        </div>
+      </div>
     </div>
   </div>
 </div>
