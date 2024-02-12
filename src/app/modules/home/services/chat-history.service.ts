@@ -41,4 +41,40 @@ export class ChatHistoryService extends CoreHttpService {
         );
     }
 
+    deleteChatById(chatId: number) {
+
+        // TODO: refactor set of token into headers 
+        // Move to Auth interceptor
+        const token = this.authService.getAccessToken();
+
+        const headers = new HttpHeaders({
+            'Authorization': 'Bearer ' + token 
+        });
+     
+        // Set options with headers
+        const options = {
+            headers: headers
+        };
+
+        return this.delete<number>(`chats/${chatId}`, options);
+    }
+
+    clearChatHistory() {
+
+        // TODO: refactor set of token into headers 
+        // Move to Auth interceptor
+        const token = this.authService.getAccessToken();
+
+        const headers = new HttpHeaders({
+            'Authorization': 'Bearer ' + token 
+        });
+     
+        // Set options with headers
+        const options = {
+            headers: headers
+        };
+
+        return this.delete(`chats`, options);
+    }
+
 }

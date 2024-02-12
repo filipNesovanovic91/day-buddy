@@ -17,12 +17,12 @@ import { MentorModel } from "../../models/mentor.model";
 })
 export class MainChatComponent implements OnInit, OnDestroy {
     chatId = 0;
-    messages$: Observable<ChatMessageModel[]> = this.messageUtilityService.messages$;  
+    messages$: Observable<ChatMessageModel[]> = this.messageUtilityService.messages$; 
+    typing$: Observable<boolean> = this.messageHttpService.isTyping$; 
     newMessage: string = '';
     disabledInputField: boolean = true; 
     profileMentor?: MentorModel;
     private unsubscribe$ = new Subject<boolean>();
-
 
     constructor(private messageUtilityService: MessageUtilityService, private messageHttpService: MessageHttpService, private activatedRouter: ActivatedRoute, private renderer: Renderer2) {
         
@@ -31,6 +31,11 @@ export class MainChatComponent implements OnInit, OnDestroy {
     ngOnInit(): void {
         this.messageHttpService.connectSignalR(); 
         this.chatId = +this.activatedRouter.snapshot.paramMap.get('chatId')!;
+        const deleteInProgres = this.messageUtilityService.getDeleteInProgres();
+        if(deleteInProgres) {
+          this.messageUtilityService.setDeleteInProgres(false);
+          return;
+        }
 
         if (this.chatId > 0) {
             // Implement logic to open the selected chat
@@ -67,7 +72,7 @@ export class MainChatComponent implements OnInit, OnDestroy {
         }
     }
 
-    sendMessageToAI() {
+    sendSuggestionMessageToAI() {
         this.disabledInputField = false; 
         this.messageHttpService.sendMessageToAI().pipe(
             takeUntil(this.unsubscribe$),

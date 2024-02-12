@@ -10,6 +10,7 @@ import { ChatHistory } from '../../models/chat-history.model';
 import { Router } from '@angular/router';
 import { MessageUtilityService } from '../../services/message-utility.service';
 import { ChatHistoryService } from '../../services/chat-history.service';
+import { take, tap } from 'rxjs';
 
 @Component({
   selector: 'app-chat-history',
@@ -19,11 +20,11 @@ import { ChatHistoryService } from '../../services/chat-history.service';
 export class ChatHistoryComponent implements OnInit, OnDestroy {
   @Input() chatHistory: ChatHistory[] = [];
   @Output() reloadChatHistory = new EventEmitter<void>();
-  @Output() deletSingleChat = new EventEmitter<number>();
 
   constructor(
     private router: Router,
-    private messageUtilityService: MessageUtilityService
+    private messageUtilityService: MessageUtilityService,
+    private chatHistoryService: ChatHistoryService,
   ) {}
 
   ngOnInit(): void {}
@@ -53,10 +54,24 @@ export class ChatHistoryComponent implements OnInit, OnDestroy {
   }
 
   public deleteChat(chatId: number): void {
-    console.log('obrisi', chatId);
+    this.messageUtilityService.setDeleteInProgres(true);
+    this.chatHistoryService.deleteChatById(chatId).pipe(
+      take(1),
+      tap(() => {
+        this.reloadChatHistory.emit();
+      })
+    ).subscribe();
   }
 
-  public clearChatHistory(): void {}
+  public clearChatHistory(): void {
+    this.chatHistoryService.clearChatHistory().pipe(
+      take(1),
+      tap(() => {
+        this.messageUtilityService.resetChatUI();
+        this.reloadChatHistory.emit(); 
+      })
+    ).subscribe();
+  }
 
   ngOnDestroy(): void {}
 }
