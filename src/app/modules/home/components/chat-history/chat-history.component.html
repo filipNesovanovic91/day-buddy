@@ -2,14 +2,22 @@
   <button (click)="startNewChat()">
     <span class="new-chat-icon icon"></span> New Chat
   </button>
-  <div
-    class="chat-history"
-    *ngFor="let chat of chatHistory"
-    (click)="selectChat(chat.id)"
-  >
-    <div class="chat-history-item">
-      <div class="chat-date">{{ chat.updatedAt }}</div>
-      <div class="content">{{ chat.name }}</div>
+  <div class="chat-history-item-wrapper">
+    <div
+      class="chat-history"
+      *ngFor="let chat of chatHistory"
+      (click)="selectChat(chat.id)"
+    >
+      <div class="chat-history-item">
+        <div class="chat-date">{{ chat.updatedAt }}</div>
+        <div class="content">{{ chat.name }}</div>
+        <div class="delete-chat-wrapper">
+          <span class="trash-icon icon" (click)="deleteChat(chat.id)"></span>
+        </div>
+      </div>
     </div>
   </div>
+  <button class="clearAllBtn" (click)="clearChatHistory()">
+    <span class="trash-icon icon"></span> Clear Chat History
+  </button>
 </div>
