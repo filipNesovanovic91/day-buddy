@@ -64,8 +64,18 @@
   height: 48px;
   background-color: #333; /* Replace with your desired background color */
   border-radius: 50%;
+  background-position: center;
+  background-repeat: no-repeat;
   border: none;
   cursor: pointer;
   margin-left: 10px;
   /* Add any other styles you need for the round element */
+}
+
+.search-icon {
+  background-image: url("../../../../../assets/icons/search.png");
+}
+
+.bell-icon {
+  background-image: url("../../../../../assets/icons/bell.png");
 }
