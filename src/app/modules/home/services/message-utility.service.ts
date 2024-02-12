@@ -9,9 +9,18 @@ export class MessageUtilityService {
   private messagesSubject$ = new BehaviorSubject<ChatMessageModel[]>([]);
   public messages$ = this.messagesSubject$.asObservable();
   public chatId: number = 0;  
+  public deleteInProgress = false;
 
   constructor() {
 
+  }
+
+  getDeleteInProgres() {
+    return this.deleteInProgress;
+  }
+
+  setDeleteInProgres(deleteInProgres: boolean) {
+    this.deleteInProgress = deleteInProgres;
   }
 
   addMessages(messages: ChatMessageModel[]): void {

@@ -6,7 +6,7 @@ import * as signalR from '@microsoft/signalr';
 import { MessageUtilityService } from "./message-utility.service";
 
 
-import { Observable, map } from "rxjs";
+import { BehaviorSubject, Observable } from "rxjs";
 import { CoreHttpService } from "../../../core/http/core-http.service";
 import { environment } from "../../../../environments/environment";
 import { AuthService } from "../../auth/services/auth.service";
@@ -16,7 +16,9 @@ import { ExistingChatModel } from "../models/existing-chat.model";
 
 @Injectable()
 export class MessageHttpService extends CoreHttpService {
-    private connection = new signalR.HubConnectionBuilder().withUrl(environment.apiUrl + '/newChat').build();;  
+    private connection = new signalR.HubConnectionBuilder().withUrl(environment.apiUrl + '/newChat').build();
+    private isTyping$$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);  
+    public isTyping$ = this.isTyping$$.asObservable();
 
     constructor(protected override http: HttpClient, private messageUtilityService: MessageUtilityService, private authService: AuthService) {
         super(http);
@@ -24,10 +26,17 @@ export class MessageHttpService extends CoreHttpService {
 
     connectSignalR() {
         this.connection.start().then(() => console.log('Connection opened!'));
+        this.connection.on('typing', (response: boolean) => {
+            this.setTyping(response);
+        });
         this.connection.on('message', (response: ChatMessageModel) => {
-            console.log(response);  
+            this.setTyping(false);  
           this.messageUtilityService.addMessages(this.messageUtilityService.getMessages().concat(response));  
         });
+    }
+
+    setTyping(typing: boolean) {
+        this.isTyping$$.next(typing);
     }
 
     disconnectSignalR() {
