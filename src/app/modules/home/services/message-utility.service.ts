@@ -9,6 +9,7 @@ export class MessageUtilityService {
   private messagesSubject$ = new BehaviorSubject<ChatMessageModel[]>([]);
   public messages$ = this.messagesSubject$.asObservable();
   public chatId: number = 0;  
+  public urlChatId: number = 0;  
   public deleteInProgress = false;
 
   constructor() {
@@ -47,6 +48,14 @@ export class MessageUtilityService {
 
   getChatId():number {
     return this.chatId as number;
+  }
+
+  setUrlChatId(chatId: number) {
+    this.urlChatId = chatId;
+  }
+
+  getUrlChatId():number {
+    return this.urlChatId as number;
   }
 
   getFormatedChatHistoryTitle(currentDate: Date, updatedAtDate: Date): string {

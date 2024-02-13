@@ -7,7 +7,7 @@ import {
   Output,
 } from '@angular/core';
 import { ChatHistory } from '../../models/chat-history.model';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { MessageUtilityService } from '../../services/message-utility.service';
 import { ChatHistoryService } from '../../services/chat-history.service';
 import { take, tap } from 'rxjs';
@@ -53,12 +53,23 @@ export class ChatHistoryComponent implements OnInit, OnDestroy {
     this.router.navigate(['home/chat']);
   }
 
-  public deleteChat(chatId: number): void {
+  public deleteChat(chatId: number, event: Event): void {
+    event.stopPropagation();
+    const urlChatId = this.messageUtilityService.getUrlChatId()
     this.messageUtilityService.setDeleteInProgres(true);
     this.chatHistoryService.deleteChatById(chatId).pipe(
       take(1),
       tap(() => {
         this.reloadChatHistory.emit();
+        if(chatId === urlChatId) {
+          this.router.routeReuseStrategy.shouldReuseRoute = function () {
+            return false;
+          };
+      
+          this.router.onSameUrlNavigation = 'reload';
+      
+          this.router.navigate(['home/chat']);
+        }
       })
     ).subscribe();
   }

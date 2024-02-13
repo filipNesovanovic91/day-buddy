@@ -12,7 +12,7 @@
         <div class="chat-date">{{ chat.updatedAt }}</div>
         <div class="content">{{ chat.name }}</div>
         <div class="delete-chat-wrapper">
-          <span class="trash-icon icon" (click)="deleteChat(chat.id)"></span>
+          <span class="trash-icon icon" (click)="deleteChat(chat.id, $event)"></span>
         </div>
       </div>
     </div>

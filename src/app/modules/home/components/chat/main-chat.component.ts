@@ -31,6 +31,7 @@ export class MainChatComponent implements OnInit, OnDestroy {
     ngOnInit(): void {
         this.messageHttpService.connectSignalR(); 
         this.chatId = +this.activatedRouter.snapshot.paramMap.get('chatId')!;
+        this.messageUtilityService.setUrlChatId(this.chatId);
         const deleteInProgres = this.messageUtilityService.getDeleteInProgres();
         if(deleteInProgres) {
           this.messageUtilityService.setDeleteInProgres(false);
