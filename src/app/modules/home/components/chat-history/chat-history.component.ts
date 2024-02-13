@@ -7,7 +7,7 @@ import {
   Output,
 } from '@angular/core';
 import { ChatHistory } from '../../models/chat-history.model';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { MessageUtilityService } from '../../services/message-utility.service';
 import { ChatHistoryService } from '../../services/chat-history.service';
 import { take, tap } from 'rxjs';
