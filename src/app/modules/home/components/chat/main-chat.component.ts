@@ -1,7 +1,6 @@
-import { Component, Input, OnDestroy, OnInit, Renderer2, SimpleChanges, ViewChild } from "@angular/core";
+import { Component, OnDestroy, OnInit, Renderer2} from "@angular/core";
 
-import { Observable, Subject, map, take, takeUntil, tap } from "rxjs";
-import { AuthService } from "../../../auth/services/auth.service";
+import { Observable, Subject, take, takeUntil, tap } from "rxjs";
 import { ChatMessageModel } from "../../models/chat-message.model";
 import { ChatButton } from "../../models/chat-button.model";
 import { MessageUtilityService } from "../../services/message-utility.service";
@@ -31,6 +30,7 @@ export class MainChatComponent implements OnInit, OnDestroy {
     ngOnInit(): void {
         this.messageHttpService.connectSignalR(); 
         this.chatId = +this.activatedRouter.snapshot.paramMap.get('chatId')!;
+        this.messageUtilityService.setUrlChatId(this.chatId);
         const deleteInProgres = this.messageUtilityService.getDeleteInProgres();
         if(deleteInProgres) {
           this.messageUtilityService.setDeleteInProgres(false);

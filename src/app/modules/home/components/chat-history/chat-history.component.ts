@@ -53,12 +53,23 @@ export class ChatHistoryComponent implements OnInit, OnDestroy {
     this.router.navigate(['home/chat']);
   }
 
-  public deleteChat(chatId: number): void {
+  public deleteChat(chatId: number, event: Event): void {
+    event.stopPropagation();
+    const urlChatId = this.messageUtilityService.getUrlChatId()
     this.messageUtilityService.setDeleteInProgres(true);
     this.chatHistoryService.deleteChatById(chatId).pipe(
       take(1),
       tap(() => {
         this.reloadChatHistory.emit();
+        if(chatId === urlChatId) {
+          this.router.routeReuseStrategy.shouldReuseRoute = function () {
+            return false;
+          };
+      
+          this.router.onSameUrlNavigation = 'reload';
+      
+          this.router.navigate(['home/chat']);
+        }
       })
     ).subscribe();
   }
