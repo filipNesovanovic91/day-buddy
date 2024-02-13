@@ -221,7 +221,6 @@
 }
 
 .profile-page {
-  overflow: auto;
   margin: 1% 5%;
 }
 
@@ -229,22 +228,31 @@
   position: relative;
   display: flex;
   align-items: center;
+  justify-content: space-around;
   gap: 16px;
+  height: 80px;
+  width: 50%;
 }
 
 .profile-picture {
-  height: 96px;
+  height: 95px;
   border-radius: 50%;
+  position: absolute;
+  bottom: 25%;
+  left: 0;
 }
 
 .profile-page-info {
   text-align: left;
+  position: absolute;
+  left: 110px;
 }
 
 .profile-name {
   font-size: 20px;
   font-weight: 500;
-  color: #ccc;
+  letter-spacing: 1px;
+  color: #f4f4f4;
 }
 
 .profile-job {
@@ -276,4 +284,113 @@
   border-radius: 16px;
   background: #0088ea;
   border: none;
+  cursor: pointer;
+}
+
+.about-container {
+  text-align: left;
+  margin-bottom: 24px;
+
+  h3 {
+    color: #fff;
+    font-weight: 500;
+  }
+  p {
+    color: #eee;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+  }
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+}
+
+.activity-box {
+  padding: 24px;
+  border-radius: 12px;
+  border: 1px solid #515151;
+  text-align: left;
+
+  h3 {
+    font-size: 14px;
+    color: #fff;
+    font-weight: 500;
+  }
+}
+
+.active-project-holder {
+  margin-top: 16px;
+  padding: 8px 12px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+}
+
+.active-project {
+  width: 250px;
+  border-radius: 8px;
+  background: #2f2f2f;
+  padding: 8px 12px;
+
+  p {
+    font-size: 12px;
+    color: #ccc;
+    font-weight: 400;
+  }
+}
+
+.past-project {
+  width: 250px;
+  border-radius: 8px;
+  padding: 8px 12px;
+
+  p {
+    font-size: 12px;
+    color: #ccc;
+    font-weight: 400;
+  }
+}
+
+.active-project-name {
+  font-size: 16px;
+  color: #77c6ff;
+  font-weight: 500;
+}
+
+.past-project-name {
+  font-size: 16px;
+  color: #ffffff !important;
+  font-weight: 500;
+}
+
+.active-button-holder {
+  display: flex;
+  align-items: flex-start;
+  align-content: flex-start;
+  gap: 8px;
+  align-self: stretch;
+  flex-wrap: wrap;
+}
+
+.active-btn {
+  margin-top: 16px;
+  display: flex;
+  padding: 2px 12px;
+  align-items: center;
+  font-size: 12px;
+  gap: 6px;
+  border-radius: 12px;
+  border: 1px solid #057e9f;
+  background-color: transparent;
+}
+.left-border {
+  border-left: 1px solid #444444;
+  padding: 0 10px;
 }
