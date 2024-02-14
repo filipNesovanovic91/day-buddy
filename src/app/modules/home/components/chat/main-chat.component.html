@@ -8,9 +8,10 @@
       <div class="message" *ngFor="let msg of message.messages">
         <p>
           <span
-            [ngClass]="message.ai ? 'robot-head-icon' : ''"
+            [ngClass]="message.ai ? 'robot-head-icon' : 'initials-circle'"
             class="chat-icon"
-          ></span>
+            >{{ message.ai ? "" : (user | initials) }}</span
+          >
           {{ message.ai ? "DayBuddy" : "You" }}
         </p>
         <p>{{ msg }}</p>

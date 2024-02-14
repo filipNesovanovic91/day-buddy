@@ -7,6 +7,8 @@ import { MessageUtilityService } from '../../services/message-utility.service';
 import { MessageHttpService } from '../../services/message-http.service';
 import { ActivatedRoute } from '@angular/router';
 import { MentorModel } from '../../models/mentor.model';
+import { AuthService } from '../../../auth/services/auth.service';
+import { User } from '../../models/user.model';
 
 @Component({
   selector: 'app-main-chat',
@@ -23,12 +25,14 @@ export class MainChatComponent implements OnInit, OnDestroy {
   disabledInputField: boolean = true;
   profileMentor?: MentorModel;
   showMoreItems: boolean = false;
+  user!: User;
   private unsubscribe$ = new Subject<boolean>();
 
   constructor(
     private messageUtilityService: MessageUtilityService,
     private messageHttpService: MessageHttpService,
     private activatedRouter: ActivatedRoute,
+    private authService: AuthService,
     private renderer: Renderer2
   ) {}
 
@@ -55,6 +59,9 @@ export class MainChatComponent implements OnInit, OnDestroy {
         });
       console.log(`Opening current chat with Id ${this.chatId}`);
     }
+
+    const token = this.authService.getAccessToken();
+    this.user = this.authService.decodeToken(token ?? '');
   }
 
   disableButtonsAfterSelect(
@@ -82,16 +89,19 @@ export class MainChatComponent implements OnInit, OnDestroy {
     }
   }
 
-    sendSuggestionMessageToAI() {
-        this.disabledInputField = false; 
-        this.messageHttpService.sendMessageToAI().pipe(
-            takeUntil(this.unsubscribe$),
-            tap((response) =>{
-                this.messageUtilityService.setChatId(response?.chatId);
-                this.messageUtilityService.setUrlChatId(response?.chatId);
-            })
-        ).subscribe();
-    }
+  sendSuggestionMessageToAI() {
+    this.disabledInputField = false;
+    this.messageHttpService
+      .sendMessageToAI()
+      .pipe(
+        takeUntil(this.unsubscribe$),
+        tap((response) => {
+          this.messageUtilityService.setChatId(response?.chatId);
+          this.messageUtilityService.setUrlChatId(response?.chatId);
+        })
+      )
+      .subscribe();
+  }
 
   openModal(mentor: MentorModel) {
     const modal = document.getElementById('modal');
