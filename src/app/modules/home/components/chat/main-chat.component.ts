@@ -78,6 +78,7 @@ export class MainChatComponent implements OnInit, OnDestroy {
             takeUntil(this.unsubscribe$),
             tap((response) =>{
                 this.messageUtilityService.setChatId(response?.chatId)
+                this.messageUtilityService.setUrlChatId(response?.chatId)
             })
         ).subscribe();
     }

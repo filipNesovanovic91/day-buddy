@@ -59,7 +59,7 @@ export class ChatHistoryService extends CoreHttpService {
         return this.delete<number>(`chats/${chatId}`, options);
     }
 
-    clearChatHistory() {
+    clearChatHistory(chatId: number) {
 
         // TODO: refactor set of token into headers 
         // Move to Auth interceptor
@@ -74,7 +74,7 @@ export class ChatHistoryService extends CoreHttpService {
             headers: headers
         };
 
-        return this.delete(`chats`, options);
+        return this.delete(`clear-chat-history/${chatId}`, options);
     }
 
 }
