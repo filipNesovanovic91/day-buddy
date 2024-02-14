@@ -110,21 +110,39 @@
   background-color: #515151;
 }
 
+.message {
+  margin: 30px 0;
+}
+
 .message p {
   margin: 10px 0;
   display: flex;
   align-items: center;
   gap: 5px;
+
+  &:first-child {
+    font-weight: 700;
+  }
 }
 
 .robot-head-icon {
   background-image: url("../../../../../assets/icons/robot-head.png");
 }
 
+.initials-circle {
+  font-size: 10px;
+  background-color: #3f51b5;
+  border-radius: 50px;
+}
+
 .chat-icon {
-  display: block;
-  width: 22px;
-  height: 22px;
+  display: flex;
+  width: 24px;
+  height: 24px;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  font-weight: 600;
   background-position: center;
   background-repeat: no-repeat;
   background-size: contain;

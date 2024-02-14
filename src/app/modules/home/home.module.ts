@@ -6,20 +6,15 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { MainChatComponent } from './components/chat/main-chat.component';
 import { ChatHistoryComponent } from './components/chat-history/chat-history.component';
 import { FormsModule } from '@angular/forms';
-
-
+import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
   declarations: [
     HomeComponent,
     NavbarComponent,
     MainChatComponent,
-    ChatHistoryComponent
+    ChatHistoryComponent,
   ],
-  imports: [
-    CommonModule,
-    HomeRoutingModule,
-    FormsModule
-  ]
+  imports: [CommonModule, HomeRoutingModule, FormsModule, SharedModule],
 })
-export class HomeModule { }
+export class HomeModule {}
