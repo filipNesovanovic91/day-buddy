@@ -36,33 +36,82 @@
         class="mentors-container"
         *ngIf="message.mentors && message.mentors.length > 0"
       >
-        <div
-          *ngFor="let mentor of message.mentors; let i = index"
-          class="single-mentor-container"
-        >
-          <div class="inner-container">
-            <div class="profile-info" (click)="openModal(mentor)">
-              <img
-                src="{{ mentor.img }}"
-                alt="{{ mentor.img }}"
-                class="mentor-img"
-              />
-              <div class="mentor-data">
-                <p class="profile-match">
-                  {{ mentor.matchPercent }}% Match - View Mentor Profile
-                </p>
-                <p class="mentor-name">
-                  {{ mentor.firstName }} {{ mentor.lastName }}
-                </p>
-                <p class="mentor-title">{{ mentor.jobTitle }}</p>
+        <div *ngIf="!showMoreItems">
+          <div class="single-mentor-container">
+            <div class="inner-container">
+              <div class="profile-info" (click)="openModal(message.mentors[0])">
+                <img
+                  src="{{ message.mentors[0].img }}"
+                  alt="{{ message.mentors[0].img }}"
+                  class="mentor-img"
+                />
+                <div class="mentor-data">
+                  <p class="profile-match">
+                    {{ message.mentors[0].matchPercent }}% Match - View Mentor
+                    Profile
+                  </p>
+                  <p class="mentor-name">
+                    {{ message.mentors[0].firstName }}
+                    {{ message.mentors[0].lastName }}
+                  </p>
+                  <p class="mentor-title">{{ message.mentors[0].jobTitle }}</p>
+                </div>
               </div>
-            </div>
-            <div class="action-buttons">
-              <button>Message</button>
-              <a>Schedule a meeting</a>
+              <div class="action-buttons">
+                <button>
+                  <a
+                    href="https://teams.microsoft.com/l/chat/0/0?users=${{
+                      message.mentors[0].email
+                    }}"
+                    target="_blank"
+                    >Message</a
+                  >
+                </button>
+                <a>Schedule a meeting</a>
+              </div>
             </div>
           </div>
         </div>
+        <div *ngIf="showMoreItems || message.mentors.length === 1">
+          <div
+            *ngFor="let mentor of message.mentors; let i = index"
+            class="single-mentor-container"
+          >
+            <div class="inner-container">
+              <div class="profile-info" (click)="openModal(mentor)">
+                <img
+                  src="{{ mentor.img }}"
+                  alt="{{ mentor.img }}"
+                  class="mentor-img"
+                />
+                <div class="mentor-data">
+                  <p class="profile-match">
+                    {{ mentor.matchPercent }}% Match - View Mentor Profile
+                  </p>
+                  <p class="mentor-name">
+                    {{ mentor.firstName }} {{ mentor.lastName }}
+                  </p>
+                  <p class="mentor-title">{{ mentor.jobTitle }}</p>
+                </div>
+              </div>
+              <div class="action-buttons">
+                <button>
+                  <a
+                    href="https://teams.microsoft.com/l/chat/0/0?users=${{
+                      mentor.email
+                    }}"
+                    target="_blank"
+                    >Message</a
+                  >
+                </button>
+                <a>Schedule a meeting</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <button class="showMoreBtn" (click)="toggleShowMore()">
+          Show {{ showMoreItems ? "Less" : "More" }} Mentors
+        </button>
       </div>
     </div>
   </div>
@@ -111,7 +160,15 @@
         </div>
         <div class="buttons-container">
           <a>Schedule a meeting</a>
-          <button>Message</button>
+          <button>
+            <a
+              href="https://teams.microsoft.com/l/chat/0/0?users=${{
+                profileMentor?.email
+              }}"
+              target="_blank"
+              >Message</a
+            >
+          </button>
         </div>
       </div>
       <div class="about-container">
