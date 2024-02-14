@@ -82,18 +82,16 @@ export class MainChatComponent implements OnInit, OnDestroy {
     }
   }
 
-  sendSuggestionMessageToAI() {
-    this.disabledInputField = false;
-    this.messageHttpService
-      .sendMessageToAI()
-      .pipe(
-        takeUntil(this.unsubscribe$),
-        tap((response) => {
-          this.messageUtilityService.setChatId(response?.chatId);
-        })
-      )
-      .subscribe();
-  }
+    sendSuggestionMessageToAI() {
+        this.disabledInputField = false; 
+        this.messageHttpService.sendMessageToAI().pipe(
+            takeUntil(this.unsubscribe$),
+            tap((response) =>{
+                this.messageUtilityService.setChatId(response?.chatId);
+                this.messageUtilityService.setUrlChatId(response?.chatId);
+            })
+        ).subscribe();
+    }
 
   openModal(mentor: MentorModel) {
     const modal = document.getElementById('modal');

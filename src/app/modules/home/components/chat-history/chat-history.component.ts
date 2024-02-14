@@ -75,10 +75,10 @@ export class ChatHistoryComponent implements OnInit, OnDestroy {
   }
 
   public clearChatHistory(): void {
-    this.chatHistoryService.clearChatHistory().pipe(
+    const chatIdUrl = this.messageUtilityService.getUrlChatId();
+    this.chatHistoryService.clearChatHistory(chatIdUrl).pipe(
       take(1),
       tap(() => {
-        this.messageUtilityService.resetChatUI();
         this.reloadChatHistory.emit(); 
       })
     ).subscribe();
