@@ -14,7 +14,7 @@
           >
           {{ message.ai ? "DayBuddy" : "You" }}
         </p>
-        <p>{{ msg }}</p>
+        <p [innerHTML]="msg"></p>  
       </div>
 
       <!-- Display Buttons -->
@@ -25,8 +25,8 @@
         <div *ngFor="let button of message.buttons; let i = index">
           <br />
           <button
-            [disabled]="button.selected"
-            (click)="disableButtonsAfterSelect(i, message.buttons, button.api)"
+            [disabled]="button.isDisabled"
+            (click)="selectButton(i, message.buttons, button.api)"
           >
             {{ button.name }}
           </button>
@@ -68,7 +68,7 @@
                     >Message</a
                   >
                 </button>
-                <a>Schedule a meeting</a>
+                <a (click)="scheduleMeeting(message.mentors[0].scheduleApi)">Schedule a meeting</a>
               </div>
             </div>
           </div>
@@ -105,7 +105,7 @@
                     >Message</a
                   >
                 </button>
-                <a>Schedule a meeting</a>
+                <a (click)="scheduleMeeting(mentor.scheduleApi)">Schedule a meeting</a>
               </div>
             </div>
           </div>
