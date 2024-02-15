@@ -19,8 +19,7 @@ import { ExistingChatModel } from '../../models/existing-chat.model';
 })
 export class MainChatComponent implements OnInit, OnDestroy {
   chatId = 0;
-  messages$: Observable<ChatMessageModel[]> =
-    this.messageUtilityService.messages$;
+  messages$: Observable<ChatMessageModel[]> = this.messageUtilityService.messages$;
   typing$: Observable<boolean> = this.messageHttpService.isTyping$;
   newMessage: string = '';
   disabledInputField: boolean = true;

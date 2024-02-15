@@ -115,6 +115,11 @@
         </button>
       </div>
     </div>
+    <div class="loading-dots" *ngIf="typing$ | async">
+      <span class="loading-dot"></span>
+      <span class="loading-dot"></span> 
+      <span class="loading-dot"></span>
+    </div>
   </div>
   <div class="prompt-input">
     <div class="suggestion-prompt-container">

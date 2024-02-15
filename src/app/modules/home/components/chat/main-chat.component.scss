@@ -436,3 +436,35 @@
   border-left: 1px solid #444444;
   padding: 0 10px;
 }
+
+.loading-dots {
+  display: inline-block;
+  font-size: 24px;
+}
+
+.loading-dot {
+  width: 10px;
+  height: 10px;
+  background-color: #fff;
+  border-radius: 50%;
+  display: inline-block;
+  margin-right: 8px; /* Adjust spacing between dots */
+  animation: jump 1s infinite ease-in-out; /* Faster animation */
+}
+
+.loading-dot:nth-child(2) {
+  animation-delay: 0.3s; /* Adjusted delay for the second dot */
+}
+
+.loading-dot:nth-child(3) {
+  animation-delay: 0.6s; /* Adjusted delay for the third dot */
+}
+
+@keyframes jump {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-15px); /* Increased jump height */
+  }
+}
