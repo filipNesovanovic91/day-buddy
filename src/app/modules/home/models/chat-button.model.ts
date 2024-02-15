@@ -3,4 +3,5 @@ export interface ChatButton {
     name: string;
     type: string;
     selected: boolean;
+    isDisabled?: boolean;
 }

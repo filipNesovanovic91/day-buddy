@@ -9,6 +9,7 @@ import { ActivatedRoute } from '@angular/router';
 import { MentorModel } from '../../models/mentor.model';
 import { AuthService } from '../../../auth/services/auth.service';
 import { User } from '../../models/user.model';
+import { ExistingChatModel } from '../../models/existing-chat.model';
 
 @Component({
   selector: 'app-main-chat',
@@ -52,6 +53,7 @@ export class MainChatComponent implements OnInit, OnDestroy {
         .setSavedChatOnUI(this.chatId)
         .subscribe((result) => {
           if (result) {
+            this.checkDisabledButtonsInResponse(result);
             this.disabledInputField = false;
             this.messageUtilityService.setChatId(this.chatId);
             this.messageUtilityService.addMessages(result.messages);
@@ -64,20 +66,39 @@ export class MainChatComponent implements OnInit, OnDestroy {
     this.user = this.authService.decodeToken(token ?? '');
   }
 
-  disableButtonsAfterSelect(
+  checkDisabledButtonsInResponse(result: ExistingChatModel): ExistingChatModel {
+    result.messages.forEach(message => {
+      message.buttons.forEach(button => {
+        button.isDisabled = !button.selected; 
+      }); 
+    });
+
+    const lastMessageIndex = result.messages.length - 1;
+    const lastMessage = result.messages[lastMessageIndex]; 
+    const allButtonsDeselected = lastMessage.buttons.every(button => !button.selected);
+    if(allButtonsDeselected) {
+      lastMessage.buttons.forEach(button => {
+        button.isDisabled = false;
+      });
+    }
+    return result;
+  }
+
+  selectButton(
     indexClicked: number,
     buttons: ChatButton[],
     api: string
   ): void {
     buttons.forEach((button, index) => {
-      button.selected = index !== indexClicked;
+      button.selected = index === indexClicked;   
     });
-
-    const urlApi = api.indexOf('chat/');
-    const endpoint = api.substring(urlApi);
+    
+    buttons.forEach((button) => {
+      button.isDisabled = !button.selected; 
+    }); 
 
     this.messageHttpService
-      .callApiFromButton(endpoint)
+      .callApiFromButton(api) 
       .pipe(take(1))
       .subscribe();
   }
@@ -116,6 +137,13 @@ export class MainChatComponent implements OnInit, OnDestroy {
 
   toggleShowMore() {
     this.showMoreItems = !this.showMoreItems;
+  }
+
+  scheduleMeeting(scheduleApi: string) {  
+    this.messageHttpService
+      .callApiFromButton(scheduleApi) 
+      .pipe(take(1))
+      .subscribe();
   }
 
   ngOnDestroy(): void {
