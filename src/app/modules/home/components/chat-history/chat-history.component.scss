@@ -10,8 +10,8 @@
 
 .chat-history-item {
   cursor: pointer;
-  padding: 10px;
-  transition: background-color 0.3s ease;
+}
+.content-wrapper {
   position: relative;
 }
 
@@ -19,18 +19,26 @@
   background-image: url("../../../../../assets/icons/new-chat.png");
 }
 
+.chat-trash-icon {
+  background-image: url("../../../../../assets/icons/chat-trash.png");
+}
+
 button span {
   display: block;
 }
 
 .chat-date {
-  font-weight: bold;
+  font-weight: 500;
   color: #999;
+  font-size: 12px;
 }
 
 .content {
   color: #f4f4f4;
   margin-top: 10px;
+  padding: 5px;
+  font-size: 16px;
+  font-weight: 400;
 }
 
 button {
@@ -82,5 +90,9 @@ button {
 .delete-chat-wrapper:hover {
   opacity: 0.35;
   transition: 0.3s ease-in;
-  background-color: #f4f4f4;
+  background: linear-gradient(
+    90deg,
+    #f4f4f4 13.24%,
+    rgba(244, 244, 244, 0.1) 75.26%
+  );
 }

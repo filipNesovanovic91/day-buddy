@@ -8,46 +8,47 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrl: './login.component.scss'
+  styleUrl: './login.component.scss',
 })
 export class LoginComponent implements OnInit, OnDestroy {
-  loginForm: FormGroup = new FormGroup({}); 
+  loginForm: FormGroup = new FormGroup({});
   private unsubscribe$ = new Subject<boolean>();
 
-  constructor(private authService:AuthService, private formBuilder: FormBuilder, private router: Router) {
-    
-  }
+  constructor(
+    private authService: AuthService,
+    private formBuilder: FormBuilder,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
     //Add 'implements OnInit' to the class.
     this.loginForm = this.formBuilder.group({
       email: [''],
-      password: ['']
+      password: [''],
     });
-    
   }
 
   loginUser() {
-
     const email = this.loginForm?.controls['email'].value;
     const password = this.loginForm?.controls['password'].value;
 
     const user: UserAuthModel = {
       email,
-      password
-    }
+      password,
+    };
 
-    this.authService.loginUser(user).pipe(
-      takeUntil(this.unsubscribe$)
-    ).subscribe(result => {
-      if(result.accessToken) {
-        this.router.navigate(['/home/chat']);  
-      }
-    });
+    this.authService
+      .loginUser(user)
+      .pipe(takeUntil(this.unsubscribe$))
+      .subscribe((result) => {
+        this.authService.userImg.next(result.image);
+
+        if (result.accessToken) {
+          this.router.navigate(['/home/chat']);
+        }
+      });
   }
-
-  
 
   ngOnDestroy(): void {
     //Called once, before the instance is destroyed.
