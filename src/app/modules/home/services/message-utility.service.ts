@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs'; 
+import { BehaviorSubject } from 'rxjs';
 import { ChatMessageModel } from '../models/chat-message.model';
 
 @Injectable({
@@ -8,13 +8,11 @@ import { ChatMessageModel } from '../models/chat-message.model';
 export class MessageUtilityService {
   private messagesSubject$ = new BehaviorSubject<ChatMessageModel[]>([]);
   public messages$ = this.messagesSubject$.asObservable();
-  public chatId: number = 0;  
-  public urlChatId: number = 0;  
+  public chatId: number = 0;
+  public urlChatId: number = 0;
   public deleteInProgress = false;
 
-  constructor() {
-
-  }
+  constructor() {}
 
   getDeleteInProgres() {
     return this.deleteInProgress;
@@ -46,7 +44,7 @@ export class MessageUtilityService {
     this.chatId = chatId;
   }
 
-  getChatId():number {
+  getChatId(): number {
     return this.chatId as number;
   }
 
@@ -54,13 +52,13 @@ export class MessageUtilityService {
     this.urlChatId = chatId;
   }
 
-  getUrlChatId():number {
+  getUrlChatId(): number {
     return this.urlChatId as number;
   }
 
   getFormatedChatHistoryTitle(currentDate: Date, updatedAtDate: Date): string {
     const diffTime = Math.abs(currentDate.getTime() - updatedAtDate.getTime());
-    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+    const diffDays = Math.round(diffTime / (1000 * 60 * 60 * 24));
 
     if (diffDays === 0) {
       return 'Today';

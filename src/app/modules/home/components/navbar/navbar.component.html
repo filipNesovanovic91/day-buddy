@@ -11,7 +11,7 @@
       </li>
       <li class="navigation-item">
         <span class="icon well-being-icon"></span>
-        <a> Well-Beign </a>
+        <a> Well-being </a>
       </li>
       <li class="navigation-item">
         <span class="icon socialize-me-icon"></span>
@@ -21,7 +21,11 @@
     <ul class="navigation-info-buttons">
       <li><button class="round-element search-icon"></button></li>
       <li><button class="round-element bell-icon"></button></li>
-      <li><button class="round-element"></button></li>
+      <li>
+        <button class="round-element">
+          <img src="{{ userImg | async }}" alt="" />
+        </button>
+      </li>
     </ul>
   </nav>
 </header>

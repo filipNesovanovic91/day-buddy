@@ -10,9 +10,16 @@
     >
       <div class="chat-history-item">
         <div class="chat-date">{{ chat.updatedAt }}</div>
-        <div class="content">{{ chat.name }}</div>
-        <div class="delete-chat-wrapper">
-          <span class="trash-icon icon" (click)="deleteChat(chat.id, $event)"></span>
+        <div class="content-wrapper">
+          <div class="content">
+            {{ chat.name | shorten : 20 }}
+          </div>
+          <div class="delete-chat-wrapper">
+            <span
+              class="chat-trash-icon icon"
+              (click)="deleteChat(chat.id, $event)"
+            ></span>
+          </div>
         </div>
       </div>
     </div>

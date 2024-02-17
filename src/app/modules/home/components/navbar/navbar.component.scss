@@ -70,6 +70,12 @@
   cursor: pointer;
   margin-left: 10px;
   /* Add any other styles you need for the round element */
+
+  img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+  }
 }
 
 .search-icon {

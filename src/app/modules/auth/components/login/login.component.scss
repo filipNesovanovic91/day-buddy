@@ -5,7 +5,7 @@
   background-color: #393939;
   background-repeat: no-repeat;
   background-position: bottom;
-  background-size: 100% 105%;
+  background-size: 100% 110%;
   display: flex;
   justify-content: left;
   align-items: center;
@@ -85,5 +85,15 @@
     .input-container a {
       float: right;
     }
+  }
+}
+
+@media only screen and (max-width: 1024px) {
+  .auth-container {
+    background-size: 100% 100%;
+  }
+
+  h2 {
+    font-size: 4.375rem !important;
   }
 }

@@ -14,7 +14,7 @@
           >
           {{ message.ai ? "DayBuddy" : "You" }}
         </p>
-        <p [innerHTML]="msg"></p>  
+        <p [innerHTML]="msg"></p>
       </div>
 
       <!-- Display Buttons -->
@@ -23,7 +23,6 @@
         *ngIf="message.buttons && message.buttons.length > 0"
       >
         <div *ngFor="let button of message.buttons; let i = index">
-          <br />
           <button
             [disabled]="button.isDisabled"
             (click)="selectButton(i, message.buttons, button.api)"
@@ -68,7 +67,9 @@
                     >Message</a
                   >
                 </button>
-                <a (click)="scheduleMeeting(message.mentors[0].scheduleApi)">Schedule a meeting</a>
+                <a (click)="scheduleMeeting(message.mentors[0].scheduleApi)"
+                  >Schedule a meeting</a
+                >
               </div>
             </div>
           </div>
@@ -105,7 +106,9 @@
                     >Message</a
                   >
                 </button>
-                <a (click)="scheduleMeeting(mentor.scheduleApi)">Schedule a meeting</a>
+                <a (click)="scheduleMeeting(mentor.scheduleApi)"
+                  >Schedule a meeting</a
+                >
               </div>
             </div>
           </div>
@@ -116,8 +119,14 @@
       </div>
     </div>
     <div class="loading-dots" *ngIf="typing$ | async">
+      <div class="message">
+        <p>
+          <span class="robot-head-icon chat-icon"></span>
+          DayBuddy
+        </p>
+      </div>
       <span class="loading-dot"></span>
-      <span class="loading-dot"></span> 
+      <span class="loading-dot"></span>
       <span class="loading-dot"></span>
     </div>
   </div>
@@ -137,10 +146,15 @@
       <input
         [disabled]="disabledInputField"
         [(ngModel)]="newMessage"
+        appHighlightInput
         type="text"
         placeholder="Message DayBuddy..."
       />
-      <span class="send-icon" (click)="sendMessage()"> </span>
+      <span
+        class="{{ disabledInputField ? 'disabled-send-icon' : 'send-icon' }}"
+        (click)="sendMessage()"
+      >
+      </span>
     </div>
   </div>
 </div>

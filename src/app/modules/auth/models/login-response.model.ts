@@ -1,4 +1,4 @@
 export interface LoginResponse {
-    accessToken: string;
-    img: string;
+  accessToken: string;
+  image: string;
 }

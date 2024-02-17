@@ -68,6 +68,10 @@
   background-image: url("../../../../../assets/icons/send.png");
 }
 
+.disabled-send-icon {
+  background-image: url("../../../../../assets/icons/diabled-send.png");
+}
+
 .input-container {
   display: flex;
   align-items: center;
@@ -89,7 +93,7 @@
 .buttons button {
   margin-right: 5px;
   padding: 8px 12px;
-
+  margin-top: 12px;
   border: 1px solid #ff7a00;
   background: rgba(255, 122, 0, 0.1);
   color: #fff;
@@ -111,7 +115,7 @@
 }
 
 .message {
-  margin: 30px 0;
+  margin-top: 30px 0;
 }
 
 .message p {
@@ -439,16 +443,17 @@
 
 .loading-dots {
   display: inline-block;
-  font-size: 24px;
+  font-size: 12px;
 }
 
 .loading-dot {
-  width: 10px;
-  height: 10px;
+  width: 5px;
+  height: 5px;
+  margin-top: 10px;
   background-color: #fff;
   border-radius: 50%;
   display: inline-block;
-  margin-right: 8px; /* Adjust spacing between dots */
+  margin-right: 4px; /* Adjust spacing between dots */
   animation: jump 1s infinite ease-in-out; /* Faster animation */
 }
 
@@ -461,10 +466,11 @@
 }
 
 @keyframes jump {
-  0%, 100% {
+  0%,
+  100% {
     transform: translateY(0);
   }
   50% {
-    transform: translateY(-15px); /* Increased jump height */
+    transform: translateY(-10px); /* Increased jump height */
   }
 }
