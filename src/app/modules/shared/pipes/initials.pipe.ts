@@ -6,6 +6,6 @@ import { User } from '../../home/models/user.model';
 })
 export class InitialsPipe implements PipeTransform {
   transform(value: User): unknown {
-    return ` ${value.firstName[0]} ${value.lastName[0]}`;
+    return `${value?.firstName[0]} ${value?.lastName[0]}`;
   }
 }
