@@ -61,7 +61,7 @@ export class MainChatComponent implements OnInit, OnDestroy {
       console.log(`Opening current chat with Id ${this.chatId}`);
     }
 
-    const token = this.authService.getAccessToken();
+    const token = this.authService.getAccessTokenFromLocalStorage();
     this.user = this.authService.decodeToken(token ?? '');
   }
 

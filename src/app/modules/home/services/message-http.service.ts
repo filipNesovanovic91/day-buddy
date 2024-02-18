@@ -30,7 +30,9 @@ export class MessageHttpService extends CoreHttpService {
             this.setTyping(response);
         });
         this.connection.on('message', (response: ChatMessageModel) => {
-            this.setTyping(false);  
+            if(response.ai) {
+              this.setTyping(false); 
+            } 
           this.messageUtilityService.addMessages(this.messageUtilityService.getMessages().concat(response));  
         });
     }
@@ -50,7 +52,7 @@ export class MessageHttpService extends CoreHttpService {
     sendMessage(message: string) {
         // TODO: refactor set of token into headers
         // Move to Auth interceptor
-        const token = this.authService.getAccessToken();
+        const token = this.authService.getAccessTokenFromLocalStorage();
 
         const headers = new HttpHeaders({
             'Authorization': 'Bearer ' + token  
@@ -75,7 +77,7 @@ export class MessageHttpService extends CoreHttpService {
     callApiFromButton(api: string) {
         // TODO: refactor set of token into headers 
          // Move to Auth interceptor
-        const token = this.authService.getAccessToken();
+        const token = this.authService.getAccessTokenFromLocalStorage();
 
         const headers = new HttpHeaders({
             'Authorization': 'Bearer ' + token  
@@ -92,7 +94,7 @@ export class MessageHttpService extends CoreHttpService {
     sendMessageToAI() {
          // TODO: refactor set of token into headers 
          // Move to Auth interceptor
-        const token = this.authService.getAccessToken();
+        const token = this.authService.getAccessTokenFromLocalStorage();
 
         const headers = new HttpHeaders({
             'Authorization': 'Bearer ' + token 
@@ -107,7 +109,7 @@ export class MessageHttpService extends CoreHttpService {
     }
 
     setSavedChatOnUI(chatId: number): Observable<ExistingChatModel> { 
-        const token = this.authService.getAccessToken();
+        const token = this.authService.getAccessTokenFromLocalStorage();
 
         const headers = new HttpHeaders({
             'Authorization': 'Bearer ' + token 

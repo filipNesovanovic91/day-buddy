@@ -18,13 +18,18 @@ export class AuthInterceptor implements HttpInterceptor {
                 const token = event?.body?.accessToken;
                 if(token) {
                     this.authService.setAccessToken(token);
+                    this.authService.setAccessTokenToLocalStorage(token);
                     request = request.clone({
-                      setHeaders: {'accessToken': token }
+                      setHeaders: { 'Authorization': 'Bearer ' + token } 
                     });
 
                     return next.handle(request);
                 }
               }
+              const savedToken = this.authService.getAccessTokenFromLocalStorage();
+              request = request.clone({
+                setHeaders: { 'Authorization': 'Bearer ' + savedToken   } 
+              });
               return next.handle(request);
             })
           );

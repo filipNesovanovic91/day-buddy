@@ -18,7 +18,7 @@ export class ChatHistoryService extends CoreHttpService {
     getChatHistory() {
         // TODO: refactor set of token into headers 
          // Move to Auth interceptor
-         const token = this.authService.getAccessToken();
+         const token = this.authService.getAccessTokenFromLocalStorage();
 
          const headers = new HttpHeaders({
              'Authorization': 'Bearer ' + token 
@@ -45,7 +45,7 @@ export class ChatHistoryService extends CoreHttpService {
 
         // TODO: refactor set of token into headers 
         // Move to Auth interceptor
-        const token = this.authService.getAccessToken();
+        const token = this.authService.getAccessTokenFromLocalStorage();
 
         const headers = new HttpHeaders({
             'Authorization': 'Bearer ' + token 
@@ -63,7 +63,7 @@ export class ChatHistoryService extends CoreHttpService {
 
         // TODO: refactor set of token into headers 
         // Move to Auth interceptor
-        const token = this.authService.getAccessToken();
+        const token = this.authService.getAccessTokenFromLocalStorage();
 
         const headers = new HttpHeaders({
             'Authorization': 'Bearer ' + token 
