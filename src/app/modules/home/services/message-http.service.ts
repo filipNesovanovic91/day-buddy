@@ -50,19 +50,6 @@ export class MessageHttpService extends CoreHttpService {
     }
 
     sendMessage(message: string) {
-        // TODO: refactor set of token into headers
-        // Move to Auth interceptor
-        const token = this.authService.getAccessTokenFromLocalStorage();
-
-        const headers = new HttpHeaders({
-            'Authorization': 'Bearer ' + token  
-        });
-    
-        // Set options with headers
-        const options = {
-            headers: headers
-        };
-
         let chatId = this.messageUtilityService.getChatId();
         
 
@@ -71,57 +58,19 @@ export class MessageHttpService extends CoreHttpService {
             message: message
         };
 
-        return this.post<any>(`new-message`, messageBody, options);
+        return this.post<any>(`new-message`, messageBody);
     }
 
     callApiFromButton(api: string) {
-        // TODO: refactor set of token into headers 
-         // Move to Auth interceptor
-        const token = this.authService.getAccessTokenFromLocalStorage();
-
-        const headers = new HttpHeaders({
-            'Authorization': 'Bearer ' + token  
-        });
-    
-        // Set options with headers
-        const options = {
-            headers: headers
-        };
-
-        return this.get<any>(api, '', options);
+        return this.get<any>(api, '');
     }
 
     sendMessageToAI() {
-         // TODO: refactor set of token into headers 
-         // Move to Auth interceptor
-        const token = this.authService.getAccessTokenFromLocalStorage();
-
-        const headers = new HttpHeaders({
-            'Authorization': 'Bearer ' + token 
-        });
-    
-        // Set options with headers
-        const options = {
-            headers: headers
-        };
-
-        return this.post<any>(`chats`, {}, options);   
+        return this.post<any>(`chats`, {});   
     }
 
     setSavedChatOnUI(chatId: number): Observable<ExistingChatModel> { 
-        const token = this.authService.getAccessTokenFromLocalStorage();
-
-        const headers = new HttpHeaders({
-            'Authorization': 'Bearer ' + token 
-        });
-    
-        // Set options with headers
-        const options = {
-            headers: headers
-        };
-
-        return this.get<ExistingChatModel>('chats/', `${chatId}`, options); 
-
+        return this.get<ExistingChatModel>('chats/', `${chatId}`);
     }
 
 }
