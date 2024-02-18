@@ -25,10 +25,6 @@ export class AuthService extends CoreHttpService {
     this.accessToken = token;
   }
 
-  getAccessToken(): string | null {
-    return this.accessToken;
-  }
-
   decodeToken(token: string): any {
     try {
       return JSON.parse(atob(token.split('.')[1]));
@@ -36,5 +32,17 @@ export class AuthService extends CoreHttpService {
       console.error('Error decoding token:', error);
       return null;
     }
+  }
+
+  setAccessTokenToLocalStorage(token: string): void {
+    localStorage.setItem('accessToken', token);
+  }
+
+  getAccessTokenFromLocalStorage(): string | null {
+    return localStorage.getItem('accessToken');
+  }
+
+  clearAccessTokenFromLocalStorage(): void {
+    localStorage.removeItem('accessToken');
   }
 }

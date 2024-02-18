@@ -18,9 +18,6 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    const token = this.authService.getAccessToken();
-    const decodedToken = this.authService.decodeToken(token ?? ''); 
-    console.log(decodedToken);
   }
 
   refreshChatHistory() {
