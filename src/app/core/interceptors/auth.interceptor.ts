@@ -1,37 +1,33 @@
 import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest, HttpResponse } from "@angular/common/http";
-import { Observable, tap } from "rxjs";
+import { Observable } from "rxjs";
+import { tap } from "rxjs/operators";
 import { AuthService } from "../../modules/auth/services/auth.service";
 import { Injectable } from "@angular/core";
 
-@Injectable() 
+@Injectable()
 export class AuthInterceptor implements HttpInterceptor {
 
-    constructor(private authService: AuthService) {
-
-    }
+    constructor(private authService: AuthService) {}
 
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-        
+        const token = this.authService.getAccessTokenFromLocalStorage();
+        if (token) {
+            request = this.addAuthorizationHeader(request, token);
+        }
         return next.handle(request).pipe(
             tap((event) => {
-              if (event instanceof HttpResponse) {
-                const token = event?.body?.accessToken;
-                if(token) {
-                    this.authService.setAccessToken(token);
-                    this.authService.setAccessTokenToLocalStorage(token);
-                    request = request.clone({
-                      setHeaders: { 'Authorization': 'Bearer ' + token } 
-                    });
-
-                    return next.handle(request);
+                if (event instanceof HttpResponse && event.body?.accessToken) {
+                    this.authService.setAccessTokenToLocalStorage(event.body.accessToken);
                 }
-              }
-              const savedToken = this.authService.getAccessTokenFromLocalStorage();
-              request = request.clone({
-                setHeaders: { 'Authorization': 'Bearer ' + savedToken   } 
-              });
-              return next.handle(request);
             })
-          );
+        );
+    }
+    
+    private addAuthorizationHeader(request: HttpRequest<any>, token: string): HttpRequest<any> {
+        return request.clone({
+            setHeaders: {
+                'Authorization': 'Bearer ' + token
+            }
+        });
     }
 }

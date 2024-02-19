@@ -21,10 +21,6 @@ export class AuthService extends CoreHttpService {
     return this.post<LoginResponse>(`Auth`, authModel);
   }
 
-  setAccessToken(token: string): void {
-    this.accessToken = token;
-  }
-
   decodeToken(token: string): any {
     try {
       return JSON.parse(atob(token.split('.')[1]));

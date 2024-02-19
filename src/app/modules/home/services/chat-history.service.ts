@@ -16,20 +16,7 @@ export class ChatHistoryService extends CoreHttpService {
     }
 
     getChatHistory() {
-        // TODO: refactor set of token into headers 
-         // Move to Auth interceptor
-         const token = this.authService.getAccessTokenFromLocalStorage();
-
-         const headers = new HttpHeaders({
-             'Authorization': 'Bearer ' + token 
-         });
-     
-         // Set options with headers
-         const options = {
-             headers: headers
-         };
-
-        return this.get<ChatHistory[]>(`chats`, '', options).pipe(
+        return this.get<ChatHistory[]>(`chats`, '').pipe(
             map(chatHistory => {
               const currentDate = new Date();
               return chatHistory.map(item => {
@@ -42,39 +29,11 @@ export class ChatHistoryService extends CoreHttpService {
     }
 
     deleteChatById(chatId: number) {
-
-        // TODO: refactor set of token into headers 
-        // Move to Auth interceptor
-        const token = this.authService.getAccessTokenFromLocalStorage();
-
-        const headers = new HttpHeaders({
-            'Authorization': 'Bearer ' + token 
-        });
-     
-        // Set options with headers
-        const options = {
-            headers: headers
-        };
-
-        return this.delete<number>(`chats/${chatId}`, options);
+        return this.delete<number>(`chats/${chatId}`);
     }
 
     clearChatHistory(chatId: number) {
-
-        // TODO: refactor set of token into headers 
-        // Move to Auth interceptor
-        const token = this.authService.getAccessTokenFromLocalStorage();
-
-        const headers = new HttpHeaders({
-            'Authorization': 'Bearer ' + token 
-        });
-     
-        // Set options with headers
-        const options = {
-            headers: headers
-        };
-
-        return this.delete(`clear-chat-history/${chatId}`, options);
+        return this.delete(`clear-chat-history/${chatId}`);
     }
 
 }
